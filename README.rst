@@ -33,7 +33,7 @@ or `Generate an API Key in Sandbox <https://sandbox-futures.kucoin.com/account/a
 
 .. code:: bash
 
-    pip install kucoin_futures-python
+    pip install kucoin-futures-python
 
 .. code:: python
 
