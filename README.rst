@@ -24,16 +24,16 @@ update
 Quick Start
 -----------
 
-Register an account with `KuMEX <https://futures.kucoin.com//ucenter/signup>`_.
+Register an account with `KuCion_Futures <https://futures.kucoin.com//ucenter/signup>`_.
 
-To test on the Sandbox  with `KuMEX Sandbox <https://sandbox-futures.kucoin.com>`_.
+To test on the Sandbox  with `KuCion_Futures Sandbox <https://sandbox-futures.kucoin.com>`_.
 
 `Generate an API Key <https://futures.kucoin.com/api/create>`_
 or `Generate an API Key in Sandbox <https://sandbox-futures.kucoin.com/account/api>`_ and enable it.
 
 .. code:: bash
 
-    pip install kucoin_futures-python
+    pip install kucoin-futures-python
 
 .. code:: python
 
@@ -62,7 +62,7 @@ or `Generate an API Key in Sandbox <https://sandbox-futures.kucoin.com/account/a
     api_passphrase = '<api_passphrase>'
 
     # Trade
-    from kumex.client import Trade
+    from kucion_futures.client import Trade
     client = Trade(key='', secret='', passphrase='', is_sandbox=False, url='')
 
     # or connect to Sandbox
@@ -81,7 +81,7 @@ or `Generate an API Key in Sandbox <https://sandbox-futures.kucoin.com/account/a
     client.cancel_all_limit_order('XBTUSDM')
 
     # User
-    from kumex.client import User
+    from kucion_futures.client import User
     client = User(api_key, api_secret, api_passphrase)
 
     # or connect to Sandbox
@@ -96,7 +96,7 @@ Websockets
 
     import asyncio
     from kucoin_futures.client import WsToken
-    from kucoin_futures.ws_client import KumexWsClient
+    from kucoin_futures.ws_client import KucoinFuturesWsClient
 
 
     async def main():
@@ -112,7 +112,7 @@ Websockets
         client = WsToken(key='', secret='', passphrase='', is_sandbox=False, url='')
         # is sandbox
         # client = WsToken(is_sandbox=True)
-        ws_client = await KumexWsClient.create(loop, client, deal_msg, private=False)
+        ws_client = await KucoinFuturesWsClient.create(loop, client, deal_msg, private=False)
         await ws_client.subscribe('/contractMarket/level2:XBTUSDM')
         await ws_client.subscribe('/contractMarket/level3:XBTUSDM')
         while True:
