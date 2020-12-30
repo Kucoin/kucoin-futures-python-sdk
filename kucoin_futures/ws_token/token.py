@@ -16,3 +16,4 @@ class GetToken(KucoinFuturesBaseRestApi):
         return self._request('POST', uri, auth=is_private)
 
 
+
