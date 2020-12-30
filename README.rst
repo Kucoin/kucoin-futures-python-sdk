@@ -24,12 +24,13 @@ update
 Quick Start
 -----------
 
-Register an account with `KuCion_Futures <https://futures.kucoin.com//ucenter/signup>`_.
+Register an account with `KuCion_Futures <https://futures.kucoin.com/signup?utm=api_github>`_.
 
 To test on the Sandbox  with `KuCion_Futures Sandbox <https://sandbox-futures.kucoin.com>`_.
 
 `Generate an API Key <https://futures.kucoin.com/api/create>`_
-or `Generate an API Key in Sandbox <https://sandbox-futures.kucoin.com/account/api>`_ and enable it.
+or `Generate an API Key in Sandbox <https://sandbox-futures.kucoin.com/api/create?utm=api_github>`_ and enable it.
+Note:API key can only be generated after logging in.
 
 .. code:: bash
 
