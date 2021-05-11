@@ -40,6 +40,7 @@ class KucoinFuturesBaseRestApi(object):
     def _request(self, method, uri, timeout=5, auth=True, params=None):
         uri_path = uri
         data_json = ''
+        version = 'v1.0.3'
         if method in ['GET', 'DELETE']:
             if params:
                 strl = []
@@ -79,7 +80,9 @@ class KucoinFuturesBaseRestApi(object):
                     "Content-Type": "application/json",
                     "KC-API-KEY-VERSION": "2"
                 }
+        headers["User-Agent"] = "kucoin-futures-python-sdk/" + version
         url = urljoin(self.url, uri)
+
         if method in ['GET', 'DELETE']:
             response_data = requests.request(method, url, headers=headers, timeout=timeout)
         else:
