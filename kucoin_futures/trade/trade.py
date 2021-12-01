@@ -190,7 +190,33 @@ class TradeData(KucoinFuturesBaseRestApi):
             'bizNo': bizNo
         }
         return self._request('POST', '/api/v1/position/margin/deposit-margin', params=params)
-
+    
+    def get_contracts_risk_limit(self, symbol):
+        """
+        https://docs.kucoin.cloud/futures/#obtain-futures-risk-limit-level
+        
+        :param symbol:  (Mandatory)
+        :type: str
+        :return:
+        """
+        return self._request('GET', f'/api/v1/contracts/risk-limit/{symbol}')
+    
+    def change_position_risk_limit_level(self, symbol, level):
+        """
+        https://docs.kucoin.com/futures/#adjust-risk-limit-level
+        
+        :param symbol:  (Mandatory)
+        :type: str
+        :param level:  (Mandatory)
+        :type: int
+        :return:
+        """
+        params = {
+            'symbol': symbol,
+            'level': level,
+        }
+        return self._request('POST', '/api/v1/position/risk-limit-level/change', params=params)
+    
     def get_fills_details(self, symbol='', orderId='', side='', type='', startAt=None, endAt=None, **kwargs):
         """
         https://docs.kumex.com/#get-fills
