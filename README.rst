@@ -19,14 +19,14 @@ Features
 
 update
 ----------
-- 2021 07/27
+- 2021 12/01
 
 Quick Start
 -----------
 
-Register an account with `KuCion_Futures <https://futures.kucoin.com/signup?utm=api_github>`_.
+Register an account with `KuCoin_Futures <https://futures.kucoin.com/signup?utm=api_github>`_.
 
-To test on the Sandbox  with `KuCion_Futures Sandbox <https://sandbox-futures.kucoin.com>`_.
+To test on the Sandbox  with `KuCoin_Futures Sandbox <https://sandbox-futures.kucoin.com>`_.
 
 `Generate an API Key <https://futures.kucoin.com/api/create>`_
 or `Generate an API Key in Sandbox <https://sandbox-futures.kucoin.com/api/create?utm=api_github>`_ and enable it.
@@ -63,7 +63,7 @@ Note:API key can only be generated after logging in.
     api_passphrase = '<api_passphrase>'
 
     # Trade
-    from kucion_futures.client import Trade
+    from kucoin_futures.client import Trade
     client = Trade(key='', secret='', passphrase='', is_sandbox=False, url='')
 
     # or connect to Sandbox
@@ -82,7 +82,7 @@ Note:API key can only be generated after logging in.
     client.cancel_all_limit_order('XBTUSDM')
 
     # User
-    from kucion_futures.client import User
+    from kucoin_futures.client import User
     client = User(api_key, api_secret, api_passphrase)
 
     # or connect to Sandbox
