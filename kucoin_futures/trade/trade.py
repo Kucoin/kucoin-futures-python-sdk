@@ -362,7 +362,7 @@ class TradeData(KucoinFuturesBaseRestApi):
 
         return self._request('POST', '/api/v1/orders', params=params)
 
-    def create_market_order(self, symbol, side, lever, clientOid='', **kwargs):
+    def create_market_order(self, symbol, side, lever, size, clientOid='', **kwargs):
         """
         Place Market Order Functions
 
@@ -382,6 +382,7 @@ class TradeData(KucoinFuturesBaseRestApi):
         """
         params = {
             'symbol': symbol,
+            'size': size,
             'side': side,
             'leverage': lever,
             'type': 'market'
