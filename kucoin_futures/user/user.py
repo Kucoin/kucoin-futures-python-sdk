@@ -40,6 +40,57 @@ class UserData(KucoinFuturesBaseRestApi):
             bizNo = self.return_unique_id[0:23]
         params['bizNo'] = bizNo
         return self._request('POST', '/api/v2/transfer-out', params=params)
+    
+    def transfer_kucoin_account_v3(self, amount, currency, recAccountType):
+        """
+        https://docs.kucoin.com/futures/#transfer-funds-to-kucoin-main-account-or-kucoin-trade-account
+        :param amount: (Mandatory) Amount to be transfered out
+        :type:float
+        :param currency: (Mandatory) Currency, including XBT,USDT
+        :type:str
+        :param recAccountType: (Mandatory) Receive account type, including MAIN,TRADE
+        :type:str
+        :return:
+                {
+                    "applyId": "625e542ad1169d000122f2d8",
+                    "bizNo": "625e542ad1169d000122f2d7",
+                    "payAccountType": "CONTRACT",
+                    "payTag": "DEFAULT",
+                    "remark": "",
+                    "recAccountType": "MAIN",
+                    "recTag": "DEFAULT",
+                    "recRemark": "",
+                    "recSystem": "KUCOIN",
+                    "status": "PROCESSING",
+                    "currency": "USDT",
+                    "amount": "0.001",
+                    "fee": "0",
+                    "sn": 889048789592893,
+                    "reason": "",
+                    "createdAt": 1650349098000,
+                    "updatedAt": 1650349098000
+                }
+        """
+        params = {'amount': amount, 'currency': currency, 'recAccountType':recAccountType}
+        return self._request('POST', '/api/v3/transfer-out', params=params)
+    
+    def transfer_funds_to_futures_account(self,amount, currency, payAccountType):
+        """
+        https://docs.kucoin.com/futures/#transfer-funds-to-kucoin-futures-account
+        :param amount: (Mandatory) Amount to be transfered out
+        :type:float
+        :param currency: (Mandatory) Currency, including XBT,USDT
+        :type:str
+        :param payAccountType: (Mandatory) Payment account type, including MAIN,TRADE
+        :type:str
+        :return:
+                {
+                    "code": "200000",
+                    "data": null
+                }
+        """
+        params = {'amount': amount, 'currency': currency, 'payAccountType':payAccountType}
+        return self._request('POST', '/api/v1/transfer-in', params=params)
 
     def get_Transfer_history(self, **kwargs):
         """
