@@ -1,9 +1,8 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
-
 from kucoin_futures.base_request.base_request import KucoinFuturesBaseRestApi
 from typing import Optional, Dict, Any
-from kucoin_futures.config import GET, POST, DELETE
+from kucoin_futures.config import GET
 
 
 class Contract(KucoinFuturesBaseRestApi):

@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
 from typing import Optional
 from kucoin_futures.base_request.base_request import KucoinFuturesBaseRestApi
 from config import GET, POST, DELETE
@@ -24,7 +26,6 @@ class Order(KucoinFuturesBaseRestApi):
         allowMaxTimeWindow: Optional[int] = None,
         **kwargs,
     ):
-
         params = {
             "symbol": symbol,
             "side": side,
@@ -103,8 +104,12 @@ class Order(KucoinFuturesBaseRestApi):
         return self._filter_request(
             GET, f"/api/v2/order/detail", params=params, auth=True
         )
-        
-    def query_active_orders(self,symbol:str,**kwargs,):
+
+    def query_active_orders(
+        self,
+        symbol: str,
+        **kwargs,
+    ):
         params = {
             "symbol": symbol,
             **kwargs,
@@ -112,10 +117,98 @@ class Order(KucoinFuturesBaseRestApi):
         return self._filter_request(
             GET, f"/api/v2/orders/active", params=params, auth=True
         )
-        
+
+    def query_all_active_orders(self, **kwargs):
+        params = {
+            **kwargs,
+        }
+        return self._filter_request(
+            GET, f"/api/v2/orders/all-active", params=params, auth=True
+        )
+
+    def query_historical_orders(
+        self,
+        symbol: str,
+        startAt: Optional[int] = None,
+        endAt: Optional[int] = None,
+        limit: Optional[int] = None,
+        fromId: Optional[int] = None,
+        **kwargs,
+    ):
+        params = {
+            "symbol": symbol,
+            "startAt": startAt,
+            "endAt": endAt,
+            "limit": limit,
+            "fromId": fromId,
+            **kwargs,
+        }
+        return self._filter_request(
+            GET, f"/api/v2/orders/historical-trades", params=params, auth=True
+        )
+
 
 class Position(KucoinFuturesBaseRestApi):
-    pass
+    def get_the_position(
+        self,
+        symbol: str,
+        **kwargs,
+    ):
+        params = {
+            "symbol": symbol,
+            **kwargs,
+        }
+        return self._filter_request(
+            GET, f"/api/v2/symbol-position", params=params, auth=True
+        )
+
+    def get_all_position(self, **kwargs):
+        params = {
+            **kwargs,
+        }
+        return self._filter_request(
+            GET, f"/api/v2/all-position", params=params, auth=True
+        )
+
+    def increase_position_margin(
+        self,
+        symbol: str,
+        positionSide: str,
+        amount: float,
+        **kwargs,
+    ):
+        params = {
+            "symbol": symbol,
+            "positionSide": positionSide,
+            "amount": amount,
+            **kwargs,
+        }
+        return self._filter_request(
+            POST, f"/api/v2/change-margin", params=params, auth=True
+        )
+
+    def position_pnl_history(
+        self,
+        symbol: Optional[str] = None,
+        typ: Optional[str] = None,
+        settleCurrency: Optional[str] = None,
+        startAt: Optional[str] = None,
+        endAt: Optional[str] = None,
+        limit: Optional[int] = 50,
+        **kwargs,
+    ):
+        params = {
+            "symbol": symbol,
+            "type": typ,
+            "settleCurrency": settleCurrency,
+            "startAt": startAt,
+            "endAt": endAt,
+            "limit": limit,
+            **kwargs,
+        }
+        return self._filter_request(
+            GET, f"/api/v2/close-pnl-his", params=params, auth=True
+        )
 
 
 class TradeApi(Order, Position):

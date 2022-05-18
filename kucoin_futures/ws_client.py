@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
 from kucoin_futures.websocket.websocket import ConnectWebsocket
 import asyncio
 
