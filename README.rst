@@ -113,11 +113,11 @@ Websockets
         client = WsToken(key='', secret='', passphrase='', is_sandbox=False, url='')
         # is sandbox
         # client = WsToken(is_sandbox=True)
-        ws_client = await KucoinFuturesWsClient.create(loop, client, deal_msg, private=False)
+        ws_client = await KucoinFuturesWsClient.create(None, client, deal_msg, private=False)
         await ws_client.subscribe('/contractMarket/level2:XBTUSDM')
         await ws_client.subscribe('/contractMarket/level3:XBTUSDM')
         while True:
-            await asyncio.sleep(60, loop=loop)
+            await asyncio.sleep(60)
 
 
     if __name__ == "__main__":
