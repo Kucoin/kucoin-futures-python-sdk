@@ -5,7 +5,7 @@ class GetToken(KucoinFuturesBaseRestApi):
 
     def get_ws_token(self, is_private=False):
         """
-        https://docs.kumex.com/#apply-for-connection-token
+        https://docs.kucoin.com/futures/#apply-for-connection-token
         :param is_private private or public
         :return:
         """

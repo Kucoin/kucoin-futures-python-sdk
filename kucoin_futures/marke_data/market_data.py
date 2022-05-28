@@ -5,7 +5,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def get_server_timestamp(self):
         """
-        https://docs.kumex.com/#server-time
+        https://docs.kucoin.com/futures/#server-time
 
         get server timestamp
         :return: 1570609496404
@@ -14,7 +14,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def get_interest_rate(self, symbol, startAt=None, endAt=None, reverse=True, offset=0, forward=True, maxCount=10):
         """
-        https://docs.kumex.com/#get-interest-rate-list
+        https://docs.kucoin.com/futures/#get-interest-rate-list
 
         :param symbol: interest symbol (Mandatory)
         :type: str
@@ -67,7 +67,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def get_index_list(self, symbol, startAt=None, endAt=None, reverse=True, offset=0, forward=True, maxCount=10):
         """
-        https://docs.kumex.com/#get-index-list
+        https://docs.kucoin.com/futures/#get-index-list
 
         :param symbol: interest symbol (Mandatory)
         :type: str
@@ -126,7 +126,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def get_current_mark_price(self, symbol):
         """
-        https://docs.kumex.com/#get-current-mark-price
+        https://docs.kucoin.com/futures/#get-current-mark-price
 
         :param symbol:
         :type: str
@@ -137,7 +137,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def get_premium_index(self, symbol, startAt=None, endAt=None, reverse=True, offset=0, forward=True, maxCount=10):
         """
-        https://docs.kumex.com/#get-premium-index
+        https://docs.kucoin.com/futures#get-premium-index
 
         :param symbol: interest symbol (Mandatory)
         :type: str
@@ -194,7 +194,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def get_current_fund_rate(self, symbol):
         """
-        https://docs.kumex.com/#get-current-funding-rate
+        https://docs.kucoin.com/futures#get-current-funding-rate
 
         :param symbol:  type str (Mandatory)
         :return:
@@ -212,7 +212,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def get_trade_history(self, symbol):
         """
-        https://docs.kumex.com/#transaction-history
+        https://docs.kucoin.com/futures#transaction-history
 
         :param symbol:  type str (Mandatory)
         :return:
@@ -237,7 +237,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def l2_order_book(self, symbol):
         """
-        https://docs.kumex.com/#get-full-order-book-level-2
+        https://docs.kucoin.com/futures#get-full-order-book-level-2
 
         :param symbol: type tar (Mandatory)
         :return:
@@ -310,7 +310,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def l3_order_book(self, symbol):
         """
-        https://docs.kumex.com/#get-full-order-book-level-3
+        [Deprecated] https://www.kucoin.com/news/en-deprecate-the-kucoin-spot-futures-api
 
         :param symbol: type tar (Mandatory)
         :return:
@@ -394,7 +394,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def get_ticker(self, symbol):
         """
-        https://docs.kumex.com/#get-real-time-ticker
+        https://docs.kucoin.com/futures#get-real-time-ticker
         :param symbol: type tar (Mandatory)
         :return:
         {
@@ -456,7 +456,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
     def get_contract_detail(self, symbol):
         """
-        https://docs.kumex.com/#get-order-info-of-the-contract
+        https://docs.kucoin.com/futures#get-order-info-of-the-contract
 
         :param symbol: type tar (Mandatory)
         :return:

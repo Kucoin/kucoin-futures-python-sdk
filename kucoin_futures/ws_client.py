@@ -4,7 +4,7 @@ import asyncio
 
 class KucoinFuturesWsClient(object):
     """
-    https://docs.kumex.com/#websocket-2
+    https://docs.kucoin.com/futures/#websocket-2
     """
 
     def __init__(self):
