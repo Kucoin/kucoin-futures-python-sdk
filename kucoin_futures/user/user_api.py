@@ -2,10 +2,11 @@
 # -*- coding:utf-8 -*-
 from typing import Optional
 from kucoin_futures.base_request.base_request import KucoinFuturesBaseRestApi
-from config import GET, POST
+from kucoin_futures.config import GET, POST
 
 
 class UserConfig(KucoinFuturesBaseRestApi):
+
     def modify_auto_deposit_margin_status(
         self,
         symbol: str,
@@ -17,9 +18,10 @@ class UserConfig(KucoinFuturesBaseRestApi):
             "autoDeposit": autoDeposit,
             **kwargs,
         }
-        return self._filter_request(
-            POST, f"/api/v2/user-config/change-auto-deposit", params=params, auth=True
-        )
+        return self._filter_request(POST,
+                                    f"/api/v2/user-config/change-auto-deposit",
+                                    params=params,
+                                    auth=True)
 
     def get_global_leverage(
         self,
@@ -30,9 +32,10 @@ class UserConfig(KucoinFuturesBaseRestApi):
             "symbol": symbol,
             **kwargs,
         }
-        return self._filter_request(
-            GET, f"/api/v2/user-config/leverage", params=params, auth=True
-        )
+        return self._filter_request(GET,
+                                    f"/api/v2/user-config/leverage",
+                                    params=params,
+                                    auth=True)
 
     def get_global_leverages(
         self,
@@ -41,9 +44,10 @@ class UserConfig(KucoinFuturesBaseRestApi):
         params = {
             **kwargs,
         }
-        return self._filter_request(
-            GET, f"/api/v2/user-config/leverages", params=params, auth=True
-        )
+        return self._filter_request(GET,
+                                    f"/api/v2/user-config/leverages",
+                                    params=params,
+                                    auth=True)
 
     def modify_global_leverage(
         self,
@@ -56,22 +60,25 @@ class UserConfig(KucoinFuturesBaseRestApi):
             "leverage": leverage,
             **kwargs,
         }
-        return self._filter_request(
-            POST, f"/api/v2/user-config/adjust-leverage", params=params, auth=True
-        )
+        return self._filter_request(POST,
+                                    f"/api/v2/user-config/adjust-leverage",
+                                    params=params,
+                                    auth=True)
 
 
 class Account(KucoinFuturesBaseRestApi):
-    def get_the_list_of_all_sub_accounts(
+
+    def list_of_all_sub_accounts(
         self,
         **kwargs,
     ):
         params = {
             **kwargs,
         }
-        return self._filter_request(
-            GET, f"/api/v2/sub-accounts", params=params, auth=True
-        )
+        return self._filter_request(GET,
+                                    f"/api/v2/sub-accounts",
+                                    params=params,
+                                    auth=True)
 
     def get_account_overview(
         self,
@@ -82,9 +89,10 @@ class Account(KucoinFuturesBaseRestApi):
             "currency": currency,
             **kwargs,
         }
-        return self._filter_request(
-            GET, f"/api/v2/account-overview", params=params, auth=True
-        )
+        return self._filter_request(GET,
+                                    f"/api/v2/account-overview",
+                                    params=params,
+                                    auth=True)
 
     def query_fund_record(
         self,
@@ -103,13 +111,15 @@ class Account(KucoinFuturesBaseRestApi):
             "endAt": endAt,
             **kwargs,
         }
-        return self._filter_request(
-            GET, f"/api/v2/transaction-history", params=params, auth=True
-        )
+        return self._filter_request(GET,
+                                    f"/api/v2/transaction-history",
+                                    params=params,
+                                    auth=True)
 
 
 class Transfer(KucoinFuturesBaseRestApi):
-    def transfer_between_master_user_and_sub_user(
+
+    def sub_transfer(
         self,
         amount: float,
         currency: str,
@@ -128,9 +138,10 @@ class Transfer(KucoinFuturesBaseRestApi):
             "subAccountType": subAccountType,
             **kwargs,
         }
-        return self._filter_request(
-            POST, f"/api/v2/sub-transfer", params=params, auth=True
-        )
+        return self._filter_request(POST,
+                                    f"/api/v2/sub-transfer",
+                                    params=params,
+                                    auth=True)
 
     def transfer_out(
         self,
@@ -145,9 +156,10 @@ class Transfer(KucoinFuturesBaseRestApi):
             "recAccountType": recAccountType,
             **kwargs,
         }
-        return self._filter_request(
-            POST, f"/api/v2/transfer-out", params=params, auth=True
-        )
+        return self._filter_request(POST,
+                                    f"/api/v2/account/transfer-out",
+                                    params=params,
+                                    auth=True)
 
     def query_transfer_out_request_record(
         self,
@@ -166,9 +178,10 @@ class Transfer(KucoinFuturesBaseRestApi):
             "status": status,
             **kwargs,
         }
-        return self._filter_request(
-            GET, f"/api/v2/transfer-list", params=params, auth=True
-        )
+        return self._filter_request(GET,
+                                    f"/api/v2/transfer-list",
+                                    params=params,
+                                    auth=True)
 
     def transfer_in(
         self,
@@ -183,9 +196,10 @@ class Transfer(KucoinFuturesBaseRestApi):
             "payAccountType": payAccountType,
             **kwargs,
         }
-        return self._filter_request(
-            POST, f"/api/v2/transfer-in", params=params, auth=True
-        )
+        return self._filter_request(POST,
+                                    f"/api/v2/transfer-in",
+                                    params=params,
+                                    auth=True)
 
 
 class UserApi(UserConfig, Account, Transfer):

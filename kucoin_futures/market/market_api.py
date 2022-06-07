@@ -7,13 +7,15 @@ from kucoin_futures.config import GET
 
 class Contract(KucoinFuturesBaseRestApi):
     def get_active_contracts(self):
-        self._filter_request(GET, "/api/v2/contracts/active", auth=False)
+        return self._filter_request(GET, "/api/v2/contracts/active", auth=False)
 
     def get_a_certain_contract(self, symbol: str):
-        self._filter_request(GET, f"/api/v2/contracts/{symbol}", auth=False)
+        return self._filter_request(GET, f"/api/v2/contracts/{symbol}", auth=False)
 
     def get_risk_limit(self, symbol: str):
-        self._filter_request(GET, f"/api/v2/contracts/risk-limit/{symbol}", auth=False)
+        return self._filter_request(
+            GET, f"/api/v2/contracts/risk-limit/{symbol}", auth=False
+        )
 
     def query_funding_history(
         self,
@@ -22,7 +24,7 @@ class Contract(KucoinFuturesBaseRestApi):
         endAt: Optional[int] = None,
         limit: Optional[int] = None,
         fromId: Optional[int] = None,
-        **kwargs: Optional[Dict(str, Any)],
+        **kwargs,
     ):
         params = {
             "symbol": symbol,
@@ -32,7 +34,9 @@ class Contract(KucoinFuturesBaseRestApi):
             "fromId": fromId,
             **kwargs,
         }
-        self._filter_request(GET, f"/api/v2/funding-history", params=params, auth=False)
+        return self._filter_request(
+            GET, f"/api/v2/funding-history", params=params, auth=False
+        )
 
     def get_klines(
         self,
@@ -40,7 +44,7 @@ class Contract(KucoinFuturesBaseRestApi):
         symbol: str,
         fro: Optional[int] = None,
         to: Optional[int] = None,
-        **kwargs: Optional[Dict(str, Any)],
+        **kwargs,
     ):
         params = {
             "granularity": granularity,
@@ -49,7 +53,9 @@ class Contract(KucoinFuturesBaseRestApi):
             "to": to,
             **kwargs,
         }
-        self._filter_request(GET, f"/api/v2/kline/query", params=params, auth=False)
+        return self._filter_request(
+            GET, f"/api/v2/kline/query", params=params, auth=False
+        )
 
     def query_funding_rate_list(
         self,
@@ -68,37 +74,47 @@ class Contract(KucoinFuturesBaseRestApi):
             "limit": limit,
             **kwargs,
         }
-        self._filter_request(
+        return self._filter_request(
             GET, f"/api/v2/contract/{symbol}/funding-rates", params=params, auth=False
         )
 
     def get_contract_mark_price(self, symbol: str):
-        self._filter_request(GET, f"/api/v2/mark-price/{symbol}/current", auth=False)
+        return self._filter_request(
+            GET, f"/api/v2/mark-price/{symbol}/current", auth=False
+        )
 
 
 class OrderBook(KucoinFuturesBaseRestApi):
     def get_order_book(self, symbol: str, limit: Optional[int] = 500, **kwargs):
         params = {"symbol": symbol, "limit": limit, **kwargs}
-        self._filter_request(GET, f"/api/v2/order-book", params=params, auth=False)
+        return self._filter_request(
+            GET, f"/api/v2/order-book", params=params, auth=False
+        )
 
     def best_maker(self, symbol: str, **kwargs):
         params = {"symbol": symbol, **kwargs}
-        self._filter_request(GET, f"/api/v2/order-book", params=params, auth=False)
+        return self._filter_request(
+            GET, f"/api/v2/order-book", params=params, auth=False
+        )
 
 
 class QuotesSnapshot(KucoinFuturesBaseRestApi):
     def get_the_latest_transaction_price(self, symbol: str, **kwargs):
         params = {"symbol": symbol, **kwargs}
-        self._filter_request(GET, f"/api/v2/ticker/price", params=params, auth=False)
+        return self._filter_request(
+            GET, f"/api/v2/ticker/price", params=params, auth=False
+        )
 
     def get_most_recent_record(self, symbol: str, limit: Optional[int] = 20, **kwargs):
         params = {"symbol": symbol, "limit": limit, **kwargs}
-        self._filter_request(GET, f"/api/v2/ticker/price", params=params, auth=False)
+        return self._filter_request(
+            GET, f"/api/v2/ticker/price", params=params, auth=False
+        )
 
 
 class Date(KucoinFuturesBaseRestApi):
     def get_server_time(self):
-        self._filter_request(GET, f"/api/v1/timestamp", auth=False)
+        return self._filter_request(GET, f"/api/v1/timestamp", auth=False)
 
 
 class ServerStatus(KucoinFuturesBaseRestApi):

@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 from typing import Optional
 from kucoin_futures.base_request.base_request import KucoinFuturesBaseRestApi
-from config import GET, POST, DELETE
+from kucoin_futures.config import GET, POST, DELETE
 
 
 class Order(KucoinFuturesBaseRestApi):
@@ -90,7 +90,7 @@ class Order(KucoinFuturesBaseRestApi):
             GET, f"/api/v2/orders/historical-trades", params=params, auth=True
         )
 
-    def query_individual_order_s_details(
+    def query_individual_orders_details(
         self,
         orderId: Optional[str] = None,
         clientOid: Optional[str] = None,

@@ -9,7 +9,7 @@ import base64
 import time
 from uuid import uuid1
 from urllib.parse import urljoin
-from typing import  Dict, Optional
+from typing import Dict, Optional
 
 try:
     import pkg_resources
@@ -113,6 +113,8 @@ class KucoinFuturesBaseRestApi(object):
         headers["User-Agent"] = "kucoin-futures-python-sdk/" + version
         url = urljoin(self.url, uri)
 
+        print(url)
+        print(data_json)
         if method in ["GET", "DELETE"]:
             response_data = requests.request(
                 method, url, headers=headers, timeout=timeout
@@ -135,8 +137,10 @@ class KucoinFuturesBaseRestApi(object):
             params (Optional[Dict], optional): Request parameter with empty unfiltered value. Defaults to None.
         """
         if params:
-            filter_params = dict(filter(lambda val: val[1] is None, params.items()))
-        self._request(*args, **kwargs, params=filter_params)
+            params = filter_params = dict(
+                filter(lambda val: val[1] is not None, params.items())
+            )
+        return self._request(*args, **kwargs, params=params)
 
     @staticmethod
     def check_response_data(response_data: requests.Response):
