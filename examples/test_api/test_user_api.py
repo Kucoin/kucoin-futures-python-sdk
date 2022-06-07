@@ -31,7 +31,7 @@ class TestUserConfig(unittest.TestCase):
         ret = self.client.get_global_leverages()
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 
-    def test_modify_global_leverage(self):
+    def test_modify_global_leverage(self):#pass
         ret = self.client.modify_global_leverage(symbol='BTCUSDTM',
                                                  leverage=10)
         print(json.dumps(ret, ensure_ascii=False, indent=2))
@@ -53,14 +53,14 @@ class TestAccount(unittest.TestCase):
         ret = self.client.list_of_all_sub_accounts()
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 
-    def test_get_account_overview(self):  #No data
+    def test_get_account_overview(self):  #pass
         ret = self.client.get_account_overview()
         print(json.dumps(ret, ensure_ascii=False, indent=2))
         time.sleep(1)
         ret = self.client.get_account_overview(currency='USDT')
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 
-    def test_query_fund_record(self):  #No data
+    def test_query_fund_record(self):  #pass
         ret = self.client.query_fund_record()
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 

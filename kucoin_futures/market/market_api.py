@@ -94,7 +94,7 @@ class OrderBook(KucoinFuturesBaseRestApi):
     def best_maker(self, symbol: str, **kwargs):
         params = {"symbol": symbol, **kwargs}
         return self._filter_request(
-            GET, f"/api/v2/order-book", params=params, auth=False
+            GET, f"/api/v2/ticker/bookTicker", params=params, auth=False
         )
 
 
@@ -108,7 +108,7 @@ class QuotesSnapshot(KucoinFuturesBaseRestApi):
     def get_most_recent_record(self, symbol: str, limit: Optional[int] = 20, **kwargs):
         params = {"symbol": symbol, "limit": limit, **kwargs}
         return self._filter_request(
-            GET, f"/api/v2/ticker/price", params=params, auth=False
+            GET, f"/api/v2/trades", params=params, auth=False
         )
 
 
@@ -122,5 +122,5 @@ class ServerStatus(KucoinFuturesBaseRestApi):
         self._filter_request(GET, f"/api/v1/status", auth=False)
 
 
-class MarketApi(Contract, OrderBook, QuotesSnapshot):
+class MarketApi(Contract, OrderBook, QuotesSnapshot, Date, ServerStatus):
     pass
