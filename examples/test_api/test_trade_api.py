@@ -49,7 +49,7 @@ class TestOrder(unittest.TestCase):
             )
             print(json.dumps(ret, ensure_ascii=False, indent=2))
 
-    def test_batch_order_cancellation(self):
+    def test_batch_order_cancellation(self):  #
         symbol = "BTCUSDTM"
         pram = dict(
             symbol=symbol,
@@ -82,7 +82,7 @@ class TestOrder(unittest.TestCase):
         ret = self.client.query_transaction_records(symbol="BTCUSDTM")
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 
-    def test_query_individual_orders_details(self):
+    def test_query_individual_orders_details(self):  # pass
         clientOid = uuid.uuid1().hex
         pram = dict(
             symbol="BTCUSDTM",
@@ -103,7 +103,7 @@ class TestOrder(unittest.TestCase):
         ret = self.client.query_individual_orders_details(orderId=orderId)
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 
-    def test_query_active_orders(self):
+    def test_query_active_orders(self):  # pass
         clientOid = uuid.uuid1().hex
         pram = dict(
             symbol="BTCUSDTM",
@@ -119,7 +119,7 @@ class TestOrder(unittest.TestCase):
         ret = self.client.query_active_orders(symbol="BTCUSDTM")
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 
-    def test_query_all_active_orders(self):
+    def test_query_all_active_orders(self):  # pass
         clientOid = uuid.uuid1().hex
         pram = dict(
             symbol="BTCUSDTM",

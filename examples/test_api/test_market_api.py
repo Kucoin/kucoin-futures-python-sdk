@@ -7,104 +7,133 @@ import os
 import json
 
 
-class TestUserApi(unittest.TestCase):
-
+class TestContract(unittest.TestCase):
     def setUp(self) -> None:
         current_path = os.path.abspath(os.path.dirname(__file__))
-        root = os.path.abspath(
-            os.path.dirname(current_path) + os.path.sep + ".")
+        root = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
 
         sys.path.append(root)
         from kucoin_futures.client import FuturesApi
         from examples_config import gloabl_examples_api_config
+
         self.client = FuturesApi(**gloabl_examples_api_config)
 
     def json_print(self, ret):
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 
-    def test_get_active_contracts(self):
+    def test_get_active_contracts(self):  # pass
         ret = self.client.get_active_contracts()
         self.json_print(ret)
 
-    def test_get_a_certain_contract(self):
-        ret = self.client.get_a_certain_contract(symbol='BTCUSDTM')
+    def test_get_a_certain_contract(self):  # pass
+        ret = self.client.get_a_certain_contract(symbol="BTCUSDTM")
+        self.json_print(ret)
+
+    def test_get_risk_limit(self):
+        ret = self.client.get_risk_limit(symbol="BTCUSDTM")
+        self.json_print(ret)
+
+    def test_query_funding_history(self):
+        # {"code":"400001","msg":"Please check the header of your request for KC-API-KEY, KC-API-SIGN, KC-API-TIMESTAMP, KC-API-PASSPHRASE"}
+        ret = self.client.query_funding_history(symbol="BTCUSDTM")
+        self.json_print(ret)
+
+    def test_get_klines(self):  # pass
+        ret = self.client.get_klines(granularity=5, symbol="BTCUSDTM")
+        self.json_print(ret)
+
+    def test_query_funding_rate_list(self):  # pass
+        ret = self.client.query_funding_rate_list(symbol="BTCUSDTM")
+        self.json_print(ret)
+
+    def test_get_contract_mark_price(self):
+        ret = self.client.get_contract_mark_price(symbol="BTCUSDTM")
         self.json_print(ret)
 
 
-class TestUserApi(unittest.TestCase):
+class TestOrderBook(unittest.TestCase):
+    def setUp(self) -> None:
+        current_path = os.path.abspath(os.path.dirname(__file__))
+        root = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
 
-    pass
+        sys.path.append(root)
+        from kucoin_futures.client import FuturesApi
+        from examples_config import gloabl_examples_api_config
 
-    # def get_risk_limit(self, symbol: str):
-    #     self._filter_request(GET,
-    #                          f"/api/v2/contracts/risk-limit/{symbol}",
-    #                          auth=False)
+        self.client = FuturesApi(**gloabl_examples_api_config)
 
-    # def query_funding_history(
-    #     self,
-    #     symbol: str,
-    #     startAt: Optional[int] = None,
-    #     endAt: Optional[int] = None,
-    #     limit: Optional[int] = None,
-    #     fromId: Optional[int] = None,
-    #     **kwargs,
-    # ):
-    #     params = {
-    #         "symbol": symbol,
-    #         "startAt": startAt,
-    #         "endAt": endAt,
-    #         "limit": limit,
-    #         "fromId": fromId,
-    #         **kwargs,
-    #     }
-    #     self._filter_request(GET,
-    #                          f"/api/v2/funding-history",
-    #                          params=params,
-    #                          auth=False)
+    def json_print(self, ret):
+        print(json.dumps(ret, ensure_ascii=False, indent=2))
 
-    # def get_klines(
-    #     self,
-    #     granularity: int,
-    #     symbol: str,
-    #     fro: Optional[int] = None,
-    #     to: Optional[int] = None,
-    #     **kwargs,
-    # ):
-    #     params = {
-    #         "granularity": granularity,
-    #         "symbol": symbol,
-    #         "from": fro,
-    #         "to": to,
-    #         **kwargs,
-    #     }
-    #     self._filter_request(GET,
-    #                          f"/api/v2/kline/query",
-    #                          params=params,
-    #                          auth=False)
+    def test_get_order_book(self):
+        # {"code":"400001","msg":"Please check the header of your request for KC-API-KEY, KC-API-SIGN, KC-API-TIMESTAMP, KC-API-PASSPHRASE"}
+        ret = self.client.get_order_book(symbol="BTCUSDTM")
+        self.json_print(ret)
 
-    # def query_funding_rate_list(
-    #     self,
-    #     symbol: str,
-    #     startAt: Optional[int] = None,
-    #     endAt: Optional[int] = None,
-    #     offset: Optional[int] = None,
-    #     limit: Optional[int] = 50,
-    #     **kwargs,
-    # ):
-    #     params = {
-    #         "symbol": symbol,
-    #         "startAt": startAt,
-    #         "endAt": endAt,
-    #         "offset": offset,
-    #         "limit": limit,
-    #         **kwargs,
-    #     }
-    #     self._filter_request(GET,
-    #                          f"/api/v2/contract/{symbol}/funding-rates",
-    #                          params=params,
-    #                          auth=False)
+    def test_best_maker(self):
+        # {"code":"400001","msg":"Please check the header of your request for KC-API-KEY, KC-API-SIGN, KC-API-TIMESTAMP, KC-API-PASSPHRASE"}
+        ret = self.client.best_maker(symbol="BTCUSDTM")
+        self.json_print(ret)
 
-    # def get_contract_mark_price(self, symbol: str):
-    #     self._filter_request(GET,
-    #                          f"/api/v2/mark-price/{symbol}/current",
-    #                          auth=False)
+
+class TestQuotesSnapshot(unittest.TestCase):
+    def setUp(self) -> None:
+        current_path = os.path.abspath(os.path.dirname(__file__))
+        root = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
+
+        sys.path.append(root)
+        from kucoin_futures.client import FuturesApi
+        from examples_config import gloabl_examples_api_config
+
+        self.client = FuturesApi(**gloabl_examples_api_config)
+
+    def json_print(self, ret):
+        print(json.dumps(ret, ensure_ascii=False, indent=2))
+
+    def test_get_the_latest_transaction_price(self):
+        # {"code":"400001","msg":"Please check the header of your request for KC-API-KEY, KC-API-SIGN, KC-API-TIMESTAMP, KC-API-PASSPHRASE"}
+        self.client.get_the_latest_transaction_price(symbol="BTCUSDTM")
+        self.json_print(ret)
+
+    def test_get_most_recent_record(self):
+        # {"code":"400001","msg":"Please check the header of your request for KC-API-KEY, KC-API-SIGN, KC-API-TIMESTAMP, KC-API-PASSPHRASE"}
+        ret = self.client.get_most_recent_record(symbol="BTCUSDTM")
+        self.json_print(ret)
+
+
+class TestDate(unittest.TestCase):
+    def setUp(self) -> None:
+        current_path = os.path.abspath(os.path.dirname(__file__))
+        root = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
+
+        sys.path.append(root)
+        from kucoin_futures.client import FuturesApi
+        from examples_config import gloabl_examples_api_config
+
+        self.client = FuturesApi(**gloabl_examples_api_config)
+
+    def json_print(self, ret):
+        print(json.dumps(ret, ensure_ascii=False, indent=2))
+
+    def test_get_server_time(self):  # pass
+        ret = self.client.get_server_time()
+        self.json_print(ret)
+
+
+class TestServerStatus(unittest.TestCase):
+    def setUp(self) -> None:
+        current_path = os.path.abspath(os.path.dirname(__file__))
+        root = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
+
+        sys.path.append(root)
+        from kucoin_futures.client import FuturesApi
+        from examples_config import gloabl_examples_api_config
+
+        self.client = FuturesApi(**gloabl_examples_api_config)
+
+    def json_print(self, ret):
+        print(json.dumps(ret, ensure_ascii=False, indent=2))
+
+    def test_get_server_status(self):  # null
+        ret = self.client.get_server_status()
+        self.json_print(ret)
