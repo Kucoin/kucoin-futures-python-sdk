@@ -155,6 +155,29 @@ class TradeData(KucoinFuturesBaseRestApi):
         ....]
         """
         return self._request('GET', '/api/v1/positions')
+        
+    def get_account_overview(self, currency):
+        """
+        https://docs.kucoin.com/futures/#get-account-overview
+
+        :currency: interest currency (Mandatory)
+        :return:  
+          { 
+            "code": "200000",
+            "data": {
+            "accountEquity": 99.8999305281, //Account equity = marginBalance + Unrealised PNL 
+            "unrealisedPNL": 0, //Unrealised profit and loss
+            "marginBalance": 99.8999305281, //Margin balance = positionMargin + orderMargin + frozenFunds + availableBalance - unrealisedPNL
+            "positionMargin": 0, //Position margin
+            "orderMargin": 0, //Order margin
+            "frozenFunds": 0, //Frozen funds for withdrawal and out-transfer
+            "availableBalance": 99.8999305281 //Available balance
+            "currency": "XBT" //currency code
+            }
+        }
+        """
+
+        return self._request('GET', f'/api/v1/account-overview?currency={currency}')
 
     def modify_auto_deposit_margin(self, symbol, status=True):
         """
