@@ -29,13 +29,8 @@ class TestContract(unittest.TestCase):
         ret = self.client.get_a_certain_contract(symbol="BTCUSDTM")
         self.json_print(ret)
 
-    def test_get_risk_limit(self):
+    def test_get_risk_limit(self):#pass
         ret = self.client.get_risk_limit(symbol="BTCUSDTM")
-        self.json_print(ret)
-
-    def test_query_funding_history(self):
-        # {"code":"400001","msg":"Please check the header of your request for KC-API-KEY, KC-API-SIGN, KC-API-TIMESTAMP, KC-API-PASSPHRASE"}
-        ret = self.client.query_funding_history(symbol="BTCUSDTM")
         self.json_print(ret)
 
     def test_get_klines(self):  # pass
@@ -66,12 +61,10 @@ class TestOrderBook(unittest.TestCase):
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 
     def test_get_order_book(self):
-        # {"code":"400001","msg":"Please check the header of your request for KC-API-KEY, KC-API-SIGN, KC-API-TIMESTAMP, KC-API-PASSPHRASE"}
         ret = self.client.get_order_book(symbol="BTCUSDTM")
         self.json_print(ret)
 
     def test_best_maker(self):
-        # {"code":"400001","msg":"Please check the header of your request for KC-API-KEY, KC-API-SIGN, KC-API-TIMESTAMP, KC-API-PASSPHRASE"}
         ret = self.client.best_maker(symbol="BTCUSDTM")
         self.json_print(ret)
 
@@ -91,12 +84,10 @@ class TestQuotesSnapshot(unittest.TestCase):
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 
     def test_get_the_latest_transaction_price(self):
-        # {"code":"400001","msg":"Please check the header of your request for KC-API-KEY, KC-API-SIGN, KC-API-TIMESTAMP, KC-API-PASSPHRASE"}
-        self.client.get_the_latest_transaction_price(symbol="BTCUSDTM")
+        ret = self.client.get_the_latest_transaction_price(symbol="BTCUSDTM")
         self.json_print(ret)
 
     def test_get_most_recent_record(self):
-        # {"code":"400001","msg":"Please check the header of your request for KC-API-KEY, KC-API-SIGN, KC-API-TIMESTAMP, KC-API-PASSPHRASE"}
         ret = self.client.get_most_recent_record(symbol="BTCUSDTM")
         self.json_print(ret)
 

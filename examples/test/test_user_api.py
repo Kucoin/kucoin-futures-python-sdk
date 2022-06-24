@@ -20,7 +20,7 @@ class TestUserConfig(unittest.TestCase):
         self.client = FuturesApi(**gloabl_examples_api_config)
 
     def test_modify_auto_deposit_margin_status(self):  #pass
-        ret = self.client.modify_auto_deposit_margin_status('BTCUSDTM', True)
+        ret = self.client.modify_auto_deposit_margin_status('BTCUSDTM', False)
         print(json.dumps(ret, ensure_ascii=False, indent=2))
 
     def test_get_global_leverage(self):  #pass

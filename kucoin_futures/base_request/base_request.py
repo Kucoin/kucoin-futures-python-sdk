@@ -113,8 +113,6 @@ class KucoinFuturesBaseRestApi(object):
         headers["User-Agent"] = "kucoin-futures-python-sdk/" + version
         url = urljoin(self.url, uri)
 
-        print(url)
-        print(data_json)
         if method in ["GET", "DELETE"]:
             response_data = requests.request(
                 method, url, headers=headers, timeout=timeout
