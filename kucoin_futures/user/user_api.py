@@ -13,6 +13,10 @@ class UserConfig(KucoinFuturesBaseRestApi):
         autoDeposit: bool,
         **kwargs,
     ):
+        """Modify the user's auto deposit margin status.
+
+        https://docs.kucoin.com/futures/new/#modify-the-user-39-s-auto-deposit-margin-status
+        """
         params = {
             "symbol": symbol,
             "autoDeposit": autoDeposit,
@@ -28,6 +32,10 @@ class UserConfig(KucoinFuturesBaseRestApi):
         symbol: str,
         **kwargs,
     ):
+        """Get the user’s global leverage
+
+        https://docs.kucoin.com/futures/new/#get-the-user-s-global-leverage
+        """
         params = {
             "symbol": symbol,
             **kwargs,
@@ -41,6 +49,10 @@ class UserConfig(KucoinFuturesBaseRestApi):
         self,
         **kwargs,
     ):
+        """Get user global leverage (all contracts)
+
+        https://docs.kucoin.com/futures/new/#get-user-global-leverage-all-contracts
+        """
         params = {
             **kwargs,
         }
@@ -55,6 +67,10 @@ class UserConfig(KucoinFuturesBaseRestApi):
         leverage: int,
         **kwargs,
     ):
+        """Modify the user’s global leverage
+
+        https://docs.kucoin.com/futures/new/#modify-the-user-s-global-leverage
+        """
         params = {
             "symbol": symbol,
             "leverage": leverage,
@@ -72,6 +88,10 @@ class Account(KucoinFuturesBaseRestApi):
         self,
         **kwargs,
     ):
+        """Get the list of all sub-accounts
+        
+        https://docs.kucoin.com/futures/new/#get-the-list-of-all-sub-accounts
+        """
         params = {
             **kwargs,
         }
@@ -85,6 +105,10 @@ class Account(KucoinFuturesBaseRestApi):
         currency: Optional[str] = None,
         **kwargs,
     ):
+        """Get Account Overview
+
+        https://docs.kucoin.com/futures/#get-account-overview
+        """
         params = {
             "currency": currency,
             **kwargs,
@@ -103,6 +127,10 @@ class Account(KucoinFuturesBaseRestApi):
         endAt: Optional[int] = None,
         **kwargs,
     ):
+        """Query Fund Record
+
+        https://docs.kucoin.com/futures/new/#query-fund-record
+        """
         params = {
             "limit": limit,
             "currency": currency,
@@ -129,6 +157,10 @@ class Transfer(KucoinFuturesBaseRestApi):
         subAccountType: str,
         **kwargs,
     ):
+        """Transfer between Master user and Sub-user
+
+        https://docs.kucoin.com/futures/new/#transfer
+        """
         params = {
             "amount": amount,
             "currency": currency,
@@ -150,6 +182,10 @@ class Transfer(KucoinFuturesBaseRestApi):
         recAccountType: str,
         **kwargs,
     ):
+        """Transfer out to KuCoin main/trading account
+
+        https://docs.kucoin.com/futures/new/#transfer-out-to-kucoin-main-trading-account
+        """
         params = {
             "amount": amount,
             "currency": currency,
@@ -170,6 +206,10 @@ class Transfer(KucoinFuturesBaseRestApi):
         status: Optional[str] = None,
         **kwargs,
     ):
+        """Query transfer out request record
+
+        https://docs.kucoin.com/futures/new/#query-transfer-out-request-record
+        """
         params = {
             "startAt": startAt,
             "endAt": endAt,
@@ -190,6 +230,10 @@ class Transfer(KucoinFuturesBaseRestApi):
         payAccountType: str,
         **kwargs,
     ):
+        """Fund transfer into futures account
+
+        https://docs.kucoin.com/futures/new/#fund-transfer-into-futures-account
+        """
         params = {
             "amount": amount,
             "currency": currency,

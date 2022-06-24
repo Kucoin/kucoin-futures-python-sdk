@@ -26,6 +26,10 @@ class Order(KucoinFuturesBaseRestApi):
         allowMaxTimeWindow: Optional[int] = None,
         **kwargs,
     ):
+        """Order placement
+
+        https://docs.kucoin.com/futures/new/#order-placement
+        """
         params = {
             "symbol": symbol,
             "side": side,
@@ -54,6 +58,10 @@ class Order(KucoinFuturesBaseRestApi):
         clientOid: Optional[str] = None,
         **kwargs,
     ):
+        """Single Order Cancellation
+
+        https://docs.kucoin.com/futures/new/#single-order-cancellation
+        """
         params = {
             "symbol": symbol,
             "orderId": orderId,
@@ -63,6 +71,10 @@ class Order(KucoinFuturesBaseRestApi):
         return self._filter_request(DELETE, f"/api/v2/order", params=params, auth=True)
 
     def batch_order_cancellation(self, symbol: str, **kwargs):
+        """Batch Order Cancellation
+
+        https://docs.kucoin.com/futures/new/#batch-order-cancellation
+        """
         params = {
             "symbol": symbol,
             **kwargs,
@@ -78,6 +90,10 @@ class Order(KucoinFuturesBaseRestApi):
         fromId: Optional[int] = None,
         **kwargs,
     ):
+        """Query Transaction Records
+
+        https://docs.kucoin.com/futures/new/#query-transaction-records
+        """
         params = {
             "symbol": symbol,
             "startAt": startAt,
@@ -96,6 +112,10 @@ class Order(KucoinFuturesBaseRestApi):
         clientOid: Optional[str] = None,
         **kwargs,
     ):
+        """Query Individual Order’s Details
+
+        https://docs.kucoin.com/futures/new/#query-individual-order-s-details
+        """
         params = {
             "orderId": orderId,
             "clientOid": clientOid,
@@ -110,6 +130,10 @@ class Order(KucoinFuturesBaseRestApi):
         symbol: str,
         **kwargs,
     ):
+        """Query Active Orders
+
+        https://docs.kucoin.com/futures/new/#query-active-orders
+        """
         params = {
             "symbol": symbol,
             **kwargs,
@@ -119,6 +143,10 @@ class Order(KucoinFuturesBaseRestApi):
         )
 
     def query_all_active_orders(self, **kwargs):
+        """Query All Active Orders
+
+        https://docs.kucoin.com/futures/new/#query-all-active-orders
+        """
         params = {
             **kwargs,
         }
@@ -135,6 +163,10 @@ class Order(KucoinFuturesBaseRestApi):
         fromId: Optional[int] = None,
         **kwargs,
     ):
+        """Query Historical Orders
+
+        https://docs.kucoin.com/futures/new/#query-historical-orders
+        """
         params = {
             "symbol": symbol,
             "startAt": startAt,
@@ -144,7 +176,7 @@ class Order(KucoinFuturesBaseRestApi):
             **kwargs,
         }
         return self._filter_request(
-            GET, f"/api/v2/orders/historical-trades", params=params, auth=True
+            GET, f"/api/v2/orders/history", params=params, auth=True
         )
 
 
@@ -154,6 +186,10 @@ class Position(KucoinFuturesBaseRestApi):
         symbol: str,
         **kwargs,
     ):
+        """Get the position of a contract
+
+        https://docs.kucoin.com/futures/new/#get-the-position-of-a-contract
+        """
         params = {
             "symbol": symbol,
             **kwargs,
@@ -163,6 +199,10 @@ class Position(KucoinFuturesBaseRestApi):
         )
 
     def get_all_position(self, **kwargs):
+        """Get the position of all contracts
+
+        https://docs.kucoin.com/futures/new/#get-the-position-of-all-contracts
+        """
         params = {
             **kwargs,
         }
@@ -177,6 +217,10 @@ class Position(KucoinFuturesBaseRestApi):
         amount: float,
         **kwargs,
     ):
+        """Increase position margin
+
+        https://docs.kucoin.com/futures/new/#increase-position-margin
+        """
         params = {
             "symbol": symbol,
             "positionSide": positionSide,
@@ -197,6 +241,10 @@ class Position(KucoinFuturesBaseRestApi):
         limit: Optional[int] = 50,
         **kwargs,
     ):
+        """Position PNL History
+
+        https://docs.kucoin.com/futures/new/#position-pnl-history
+        """
         params = {
             "symbol": symbol,
             "type": typ,
@@ -211,5 +259,32 @@ class Position(KucoinFuturesBaseRestApi):
         )
 
 
-class TradeApi(Order, Position):
+class FundingFees(KucoinFuturesBaseRestApi):
+    def query_funding_history(
+        self,
+        symbol: str,
+        startAt: Optional[int] = None,
+        endAt: Optional[int] = None,
+        limit: Optional[int] = None,
+        fromId: Optional[int] = None,
+        **kwargs,
+    ):
+        """Query Funding Fee Settlement History
+
+        https://docs.kucoin.com/futures/new/#query-funding-fee-settlement-history
+        """
+        params = {
+            "symbol": symbol,
+            "startAt": startAt,
+            "endAt": endAt,
+            "limit": limit,
+            "fromId": fromId,
+            **kwargs,
+        }
+        return self._filter_request(
+            GET, f"/api/v2/funding-history", params=params, auth=True
+        )
+
+
+class TradeApi(Order, Position, FundingFees):
     pass
