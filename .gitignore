@@ -1,4 +1,4 @@
 /.idea
+./vscode
 *.pyc
 /__pycache__
-test_code.py

@@ -19,7 +19,7 @@ Features
 
 update
 ----------
-- 2021 12/01
+- 2022 06/24
 
 Quick Start
 -----------
@@ -39,56 +39,37 @@ Note:API key can only be generated after logging in.
 .. code:: python
 
     #  MarketData
-    from kucoin_futures.client import Market
-    client = Market(url='https://api-futures.kucoin.com')
+    from kucoin_futures.client import FuturesApi
+    client = FuturesApi(url='https://api-futures.kucoin.com')
     # client = Market()
     # or connect to Sandbox
     # client = Market(url='https://api-sandbox-futures.kucoin.com')
     # client = Market(is_sandbox=True)
 
-    # get l3_order_book
-    l3_depth = client.l3_order_book('XBTUSDM')
+    # get order_book `GET /api/v2/order-book`
+    order_book = client.get_order_book(symbol="BTCUSDTM")
+    print(order_book)
 
-    # get l2_order_book
-    l2_depth = client.l2_order_book('XBTUSDM')
-
-    # get symbol ticker
-    klines = client.get_ticker("XBTUSDM")
-
-    # get symbol ticker
-    server_time = client.get_server_timestamp()
-
-    api_key = '<api_key>'
-    api_secret = '<api_secret>'
-    api_passphrase = '<api_passphrase>'
+    # get Best Maker `GET /api/v2/ticker/bookTicker`
+    best_maker = client.best_maker(symbol="BTCUSDTM")
 
     # Trade
-    from kucoin_futures.client import Trade
-    client = Trade(key='', secret='', passphrase='', is_sandbox=False, url='')
+    client = FuturesApi(key='', secret='', passphrase='', is_sandbox=False, url='')
 
     # or connect to Sandbox
-    # client = Trade(api_key, api_secret, api_passphrase, is_sandbox=True)
+    # client = FuturesApi(api_key, api_secret, api_passphrase, is_sandbox=True)
 
     # place a limit buy order
-    order_id = client.create_limit_order('XBTUSDM', 'buy', '1', '30', '8600')
+    order = client.order_placement(
+            symbol="BTCUSDTM",
+            # clientOid=uuid.uuid1().hex,
+            side="BUY",
+            typ="LIMIT",
+            price=1,
+            size=1,
+        )
+    print(order)
 
-    # place a market buy order   Use cautiously
-    order_id = client.create_market_order('XBTUSDM', 'buy', '1')
-
-    # cancel limit order 
-    client.cancel_order('5bd6e9286d99522a52e458de')
-
-    # cancel all limit order 
-    client.cancel_all_limit_order('XBTUSDM')
-
-    # User
-    from kucoin_futures.client import User
-    client = User(api_key, api_secret, api_passphrase)
-
-    # or connect to Sandbox
-    # client = User(api_key, api_secret, api_passphrase, is_sandbox=True)
-
-    address = client.get_withdrawal_quota('XBT')
 
 Websockets
 ----------
@@ -101,11 +82,10 @@ Websockets
 
 
     async def main():
+        test_topic = '/futuresMarket/level2Depth50:BTCUSDTM'
         async def deal_msg(msg):
-            if msg['topic'] == '/contractMarket/level2:XBTUSDM':
-                print(f'Get XBTUSDM Ticker:{msg["data"]}')
-            elif msg['topic'] == '/contractMarket/level3:XBTUSDTM':
-                print(f'Get XBTUSDTM level3:{msg["data"]}')
+            if msg.get('topic','') == test_topic:
+                print(msg)
 
         # is public
         # client = WsToken()
@@ -114,12 +94,11 @@ Websockets
         # is sandbox
         # client = WsToken(is_sandbox=True)
         ws_client = await KucoinFuturesWsClient.create(loop, client, deal_msg, private=False)
-        await ws_client.subscribe('/contractMarket/level2:XBTUSDM')
-        await ws_client.subscribe('/contractMarket/level3:XBTUSDM')
+        await ws_client.subscribe(test_topic)
         while True:
-            await asyncio.sleep(60, loop=loop)
+            await asyncio.sleep(60)
 
 
     if __name__ == "__main__":
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_event_loop_policy().get_event_loop()
         loop.run_until_complete(main())
