@@ -42,7 +42,7 @@ class KucoinFuturesBaseRestApi(object):
         self.passphrase = passphrase
         self.is_v1api = is_v1api
 
-    def _request(self, method, uri, timeout=5, auth=True, params=None):
+    def _request(self, method, uri, timeout=15, auth=True, params=None):
         uri_path = uri
         data_json = ''
         if method in ['GET', 'DELETE']:
