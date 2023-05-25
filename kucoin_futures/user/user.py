@@ -305,3 +305,109 @@ class UserData(KucoinFuturesBaseRestApi):
             params.update(kwargs)
 
         return self._request('GET', '/api/v1/transaction-history', params=params)
+
+    def get_sub_account_api_list(self, sub_name, **kwargs):
+        """
+        https://docs.kucoin.com/futures/#get-sub-account-futures-api-list
+        :param sub_name: Sub-account name.
+        :type: str
+        :param kwargs: [optional] apiKey
+        :return:
+        {
+            "subName": "AAAAAAAAAAAAA0022",
+            "remark": "hytest01-01",
+            "apiKey": "63032453e75087000182982b",
+            "permission": "General",
+            "ipWhitelist": "",
+            "createdAt": 1661150291000
+        }
+        """
+        params = {
+            'subName': sub_name
+        }
+        if kwargs:
+            params.update(kwargs)
+        return self._request('GET', '/api/v1/sub/api-key', params=params)
+
+    def create_apis_for_sub_account(self, sub_name, passphrase, remark, **kwargs):
+        """
+        https://docs.kucoin.com/futures/#create-futures-apis-for-sub-account
+        :param sub_name: Sub-account name(must contain 7-32 characters, at least one number and one letter. Cannot contain any spaces.)
+        :type: str
+        :param passphrase: Password(Must contain 7-32 characters. Cannot contain any spaces.)
+        :type: str
+        :param remark: Remarks(1~24 characters)
+        :type: str
+        :param kwargs:  [Optional]  permission, ipWhitelist, expire
+        :return:
+         {
+            "subName": "AAAAAAAAAA0007",
+            "remark": "remark",
+            "apiKey": "630325e0e750870001829864",
+            "apiSecret": "110f31fc-61c5-4baf-a29f-3f19a62bbf5d",
+            "passphrase": "passphrase",
+            "permission": "General",
+            "ipWhitelist": "",
+            "createdAt": 1661150688000
+         }
+        """
+        params = {
+            'subName': sub_name,
+            'passphrase': passphrase,
+            'remark': remark
+        }
+        if kwargs:
+            params.update(kwargs)
+
+        return self._request('POST', '/api/v1/sub/api-key', params=params)
+
+    def modify_sub_account_apis(self, sub_name, api_key, passphrase, **kwargs):
+        """
+        https://docs.kucoin.com/futures/#modify-sub-account-futures-apis
+        :param sub_name: Sub-account name
+        :type: str
+        :param passphrase: Password of API key
+        :type: str
+        :param api_key: API-Key(Sub-account APIKey)
+        :type: str
+        :param kwargs:  [Optional]  permission, ipWhitelist, expire
+        :return:
+         {
+            "subName": "AAAAAAAAAA0007",
+            "apiKey": "630329b4e7508700018298c5",
+            "permission": "General",
+            "ipWhitelist": "127.0.0.1",
+         }
+        """
+        params = {
+            'subName': sub_name,
+            'passphrase': passphrase,
+            'apiKey': api_key
+        }
+        if kwargs:
+            params.update(kwargs)
+
+        return self._request('POST', '/api/v1/sub/api-key/update', params=params)
+
+    def delete_sub_account_apis(self, sub_name, api_key, passphrase):
+        """
+        https://docs.kucoin.com/futures/#delete-sub-account-futures-apis
+        :param sub_name: Sub-account name(The sub-account name corresponding to the API key)
+        :type: str
+        :param passphrase: Password(Password of the API key)
+        :type: str
+        :param api_key: API-Key(API key to be deleted)
+        :type: str
+        :return:
+         {
+           "subName": "AAAAAAAAAA0007",
+           "apiKey": "630325e0e750870001829864"
+         }
+        """
+        params = {
+            'subName': sub_name,
+            'passphrase': passphrase,
+            'apiKey': api_key
+        }
+
+        return self._request('DELETE', '/api/v1/sub/api-key', params=params)
