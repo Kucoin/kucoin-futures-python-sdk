@@ -411,3 +411,57 @@ class UserData(KucoinFuturesBaseRestApi):
         }
 
         return self._request('DELETE', '/api/v1/sub/api-key', params=params)
+
+    def get_account_overview_all(self, currency="XBT"):
+        """
+        https://www.kucoin.com/zh-hant/docs/rest/funding/funding-overview/get-all-sub-accounts-balance-futures
+        :param currency: string Currecny ,including XBT,USDT,Default XBT
+        :return:
+          {
+            "success": true,
+            "code": "200",
+            "msg": "success",
+            "retry": false,
+            "data": {
+                "summary": {
+                    "accountEquityTotal": 9.99,
+                    "unrealisedPNLTotal": 0,
+                    "marginBalanceTotal": 9.99,
+                    "positionMarginTotal": 0,
+                    "orderMarginTotal": 0,
+                    "frozenFundsTotal": 0,
+                    "availableBalanceTotal": 9.99,
+                    "currency": "USDT"
+                },
+                "accounts": [
+                    {
+                        "accountName": "main",
+                        "accountEquity": 9.99,
+                        "unrealisedPNL": 0,
+                        "marginBalance": 9.99,
+                        "positionMargin": 0,
+                        "orderMargin": 0,
+                        "frozenFunds": 0,
+                        "availableBalance": 9.99,
+                        "currency": "USDT"
+                    },
+                    {
+                        "accountName": "subacct",
+                        "accountEquity": 0,
+                        "unrealisedPNL": 0,
+                        "marginBalance": 0,
+                        "positionMargin": 0,
+                        "orderMargin": 0,
+                        "frozenFunds": 0,
+                        "availableBalance": 0,
+                        "currency": "USDT"
+                    }
+                ]
+            }
+        }
+        """
+        params = {
+            'currency': currency
+        }
+
+        return self._request('GET', '/api/v1/account-overview-all', params=params)
