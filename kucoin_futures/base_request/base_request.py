@@ -9,6 +9,8 @@ import base64
 import time
 from uuid import uuid1
 from urllib.parse import urljoin
+import socket
+
 
 try:
     import pkg_resources
@@ -41,6 +43,7 @@ class KucoinFuturesBaseRestApi(object):
         self.secret = secret
         self.passphrase = passphrase
         self.is_v1api = is_v1api
+        self.TCP_NODELAY = 0
 
     def _request(self, method, uri, timeout=5, auth=True, params=None):
         uri_path = uri
@@ -87,10 +90,19 @@ class KucoinFuturesBaseRestApi(object):
         headers["User-Agent"] = "kucoin-futures-python-sdk/" + version
         url = urljoin(self.url, uri)
 
+        superReq = requests
+        if self.TCP_NODELAY == 1:
+            superReq = requests.Session()
+            adapter = requests.adapters.HTTPAdapter()
+            adapter.socket_options = [
+                (socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+            ]
+            superReq.mount('https://', adapter)
+
         if method in ['GET', 'DELETE']:
-            response_data = requests.request(method, url, headers=headers, timeout=timeout)
+            response_data = superReq.request(method, url, headers=headers, timeout=timeout)
         else:
-            response_data = requests.request(method, url, headers=headers, data=data_json,
+            response_data = superReq.request(method, url, headers=headers, data=data_json,
                                              timeout=timeout)
         return self.check_response_data(response_data)
 

@@ -190,7 +190,7 @@ class TradeData(KucoinFuturesBaseRestApi):
             'bizNo': bizNo
         }
         return self._request('POST', '/api/v1/position/margin/deposit-margin', params=params)
-    
+
     def get_contracts_risk_limit(self, symbol):
         """
         https://docs.kucoin.cloud/futures/#obtain-futures-risk-limit-level
@@ -200,7 +200,7 @@ class TradeData(KucoinFuturesBaseRestApi):
         :return:
         """
         return self._request('GET', f'/api/v1/contracts/risk-limit/{symbol}')
-    
+
     def change_position_risk_limit_level(self, symbol, level):
         """
         https://docs.kucoin.com/futures/#adjust-risk-limit-level
@@ -216,7 +216,7 @@ class TradeData(KucoinFuturesBaseRestApi):
             'level': level,
         }
         return self._request('POST', '/api/v1/position/risk-limit-level/change', params=params)
-    
+
     def get_fills_details(self, symbol='', orderId='', side='', type='', startAt=None, endAt=None, **kwargs):
         """
         https://docs.kumex.com/#get-fills
@@ -403,8 +403,6 @@ class TradeData(KucoinFuturesBaseRestApi):
         :return:{'cancelledOrderIds': ['5d9ee77825aa3809494eac87']}
         """
         return self._request('DELETE', f'/api/v1/orders/{orderId}')
-
-
 
     def cancel_all_limit_order(self, symbol):
         """
@@ -638,5 +636,72 @@ class TradeData(KucoinFuturesBaseRestApi):
         """
         return self._request('GET', f'/api/v1/orders/{orderId}')
 
+    def get_public_funding_history(self, symbol, fr, to):
+        """
+        Get Public Funding History
+        Query the funding rate at each settlement time point within a certain time range of the corresponding contract
+        https://www.kucoin.com/docs/rest/futures-trading/funding-fees/get-public-funding-history
+        :param symbol: Symbol of the contract
+        :param fr: Start time (milisecond)
+        :param to: End time (milisecond)
+        :return:
+          {
+              "success": true,
+              "code": "200",
+              "msg": "success",
+              "retry": false,
+              "data": [
+                  {
+                      "symbol": "IDUSDTM",
+                      "fundingRate": 0.018750,
+                      "timepoint": 1702310700000
+                  }
+              ]
+          }
+        """
+        params = {
+            'symbol': symbol,
+            'from': fr,
+            'to': to,
 
+        }
+        return self._request('GET', '/api/v1/contract/funding-rates', params=params)
 
+    def get_24h_futures_transaction_volume(self):
+        """
+        Get 24-hour platform futures trading volume
+        https://www.kucoin.com/docs/rest/futures-trading/market-data/get-24hour-futures-transaction-volume
+        :return:
+        {
+          "success": true,
+          "code": "200",
+          "msg": "success",
+          "retry": false,
+          "data": {
+              "turnoverOf24h": 619 //24-hour platform Futures trading volume. Unit is USD
+          }
+        }
+        """
+        return self._request('GET', '/api/v1/trade-statistics')
+
+    def cancel_order_by_clientOid(self, clientOid, symbol):
+        """
+        Cancel Order by clientOid
+        You will receive success message once the system has received the cancellation request. The cancellation request will be processed by matching engine in sequence. To know if the request has been processed, you may check the order status or update message from the pushes.
+        Response the ID created by the client (clientOid).
+        If the order can not be canceled (already filled or previously canceled, etc), then an error response will indicate the reason in the message field.
+        https://www.kucoin.com/docs/rest/futures-trading/orders/cancel-order-by-clientoid
+        :return:
+          {
+            "code": "200000",
+            "data": {
+              "clientOid": [
+                "5cdfc120b21023a909e5ad52"
+              ]
+            }
+          }
+        """
+        params = {
+            'symbol': symbol
+        }
+        return self._request('DELETE', f'/api/v1/orders/client-order/{clientOid}', params=params)

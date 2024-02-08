@@ -19,7 +19,17 @@ Features
 
 update
 ----------
-- 2023 07/19
+- 2024 02/07
+ 1. trade.get_public_funding_history: `Get Public Funding History <https://www.kucoin.com/docs/rest/futures-trading/funding-fees/get-public-funding-history>`_.
+ 2. trade.get_24h_futures_transaction_volume: `Get 24-hour platform futures trading volume <https://www.kucoin.com/docs/rest/futures-trading/market-data/get-24hour-futures-transaction-volume>`_.
+ 3. trade.cancel_order_by_clientOid: `Cancel Order by clientOid <https://www.kucoin.com/docs/rest/futures-trading/orders/cancel-order-by-clientoid>`_.
+ 4. customized websocket: ./kucoin_futures/example_customized_ws_private.py | kucoin_futures/example_customized_ws_public.py.
+  - sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+ 5. set api TCP_NODELAY：After instantiating the client, you can cancel the Nagle algorithm through client.TCP_NODELAY=1 (default is 0)
+  - kucoin/example_client_TCP_NODELAY.py
+
+
+
 
 Quick Start
 -----------
@@ -92,34 +102,6 @@ Note:API key can only be generated after logging in.
 
 Websockets
 ----------
-
-.. code:: python
-
-    import asyncio
-    from kucoin_futures.client import WsToken
-    from kucoin_futures.ws_client import KucoinFuturesWsClient
-
-
-    async def main():
-        async def deal_msg(msg):
-            if msg['topic'] == '/contractMarket/level2:XBTUSDM':
-                print(f'Get XBTUSDM Ticker:{msg["data"]}')
-            elif msg['topic'] == '/contractMarket/level3:XBTUSDTM':
-                print(f'Get XBTUSDTM level3:{msg["data"]}')
-
-        # is public
-        # client = WsToken()
-        # is private
-        client = WsToken(key='', secret='', passphrase='', is_sandbox=False, url='')
-        # is sandbox
-        # client = WsToken(is_sandbox=True)
-        ws_client = await KucoinFuturesWsClient.create(loop, client, deal_msg, private=False)
-        await ws_client.subscribe('/contractMarket/level2:XBTUSDM')
-        await ws_client.subscribe('/contractMarket/level3:XBTUSDM')
-        while True:
-            await asyncio.sleep(60, loop=loop)
-
-
-    if __name__ == "__main__":
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(main())
+- ./kucoin_futures/example_customized_ws_private.py
+- ./kucoin_futures/example_customized_ws_public.py
+- ./kucoin_futures/example_default_ws_public.py
