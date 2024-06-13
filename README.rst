@@ -36,10 +36,8 @@ Quick Start
 
 Register an account with `KuCoin_Futures <https://futures.kucoin.com/signup?utm=api_github>`_.
 
-To test on the Sandbox  with `KuCoin_Futures Sandbox <https://sandbox-futures.kucoin.com>`_.
 
-`Generate an API Key <https://futures.kucoin.com/api/create>`_
-or `Generate an API Key in Sandbox <https://sandbox-futures.kucoin.com/api/create?utm=api_github>`_ and enable it.
+`Generate an API Key <https://futures.kucoin.com/api/create>`_ and enable it.
 Note:API key can only be generated after logging in.
 
 .. code:: bash
@@ -52,9 +50,7 @@ Note:API key can only be generated after logging in.
     from kucoin_futures.client import Market
     client = Market(url='https://api-futures.kucoin.com')
     # client = Market()
-    # or connect to Sandbox
-    # client = Market(url='https://api-sandbox-futures.kucoin.com')
-    # client = Market(is_sandbox=True)
+
 
     # get l3_order_book
     l3_depth = client.l3_order_book('XBTUSDM')
@@ -74,10 +70,9 @@ Note:API key can only be generated after logging in.
 
     # Trade
     from kucoin_futures.client import Trade
-    client = Trade(key='', secret='', passphrase='', is_sandbox=False, url='')
+    client = Trade(key='', secret='', passphrase='',  url='')
 
-    # or connect to Sandbox
-    # client = Trade(api_key, api_secret, api_passphrase, is_sandbox=True)
+
 
     # place a limit buy order
     order_id = client.create_limit_order('XBTUSDM', 'buy', '1', '30', '8600')
@@ -95,8 +90,7 @@ Note:API key can only be generated after logging in.
     from kucoin_futures.client import User
     client = User(api_key, api_secret, api_passphrase)
 
-    # or connect to Sandbox
-    # client = User(api_key, api_secret, api_passphrase, is_sandbox=True)
+
 
     address = client.get_withdrawal_quota('XBT')
 

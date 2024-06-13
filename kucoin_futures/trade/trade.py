@@ -365,9 +365,7 @@ class TradeData(KucoinFuturesBaseRestApi):
     def create_market_order(self, symbol, side, lever, clientOid='', **kwargs):
         """
         Place Market Order Functions
-
-        https://docs.kumex.com/#place-an-order
-
+        https://www.kucoin.com/docs/rest/futures-trading/orders/place-order
         :param symbol: interest symbol (Mandatory)
         :type: str
         :param side: place direction buy or sell (Mandatory)
@@ -394,6 +392,25 @@ class TradeData(KucoinFuturesBaseRestApi):
             params.update(kwargs)
 
         return self._request('POST', '/api/v1/orders', params=params)
+
+    def place_order_test(self, symbol, side, lever, type, clientOid='', **kwargs):
+        """
+        Place Order Test
+        https://www.kucoin.com/docs/rest/futures-trading/orders/place-order-test
+        """
+        params = {
+            'symbol': symbol,
+            'side': side,
+            'leverage': lever,
+            'type': type
+
+        }
+        if not clientOid:
+            clientOid = self.return_unique_id
+        params['clientOid'] = clientOid
+        if kwargs:
+            params.update(kwargs)
+        return self._request('POST', '/api/v1/orders/test', params=params)
 
     def cancel_order(self, orderId):
         """
@@ -705,3 +722,13 @@ class TradeData(KucoinFuturesBaseRestApi):
             'symbol': symbol
         }
         return self._request('DELETE', f'/api/v1/orders/client-order/{clientOid}', params=params)
+
+
+    def place_multiple_orders(self, orderList):
+        """
+        Place Multiple Orders
+        https://www.kucoin.com/zh-hant/docs/rest/futures-trading/orders/place-multiple-orders
+        You can place up to 20 orders at one time, including limit orders, market orders, and stop orders
+        """
+        params = orderList
+        return self._request('POST', '/api/v1/orders/multi', params=params)
