@@ -80,10 +80,10 @@ Note:API key can only be generated after logging in.
     # place a market buy order   Use cautiously
     order_id = client.create_market_order('XBTUSDM', 'buy', '1')
 
-    # cancel limit order 
+    # cancel limit order
     client.cancel_order('5bd6e9286d99522a52e458de')
 
-    # cancel all limit order 
+    # cancel all limit order
     client.cancel_all_limit_order('XBTUSDM')
 
     # User
@@ -96,6 +96,5 @@ Note:API key can only be generated after logging in.
 
 Websockets
 ----------
-- ./kucoin_futures/example_customized_ws_private.py
-- ./kucoin_futures/example_customized_ws_public.py
-- ./kucoin_futures/example_default_ws_public.py
+- ./kucoin_futures/example/example_ws_private.py
+- ./kucoin_futures/example/example_default_ws_public.py
