@@ -19,6 +19,7 @@ except (ModuleNotFoundError, pkg_resources.DistributionNotFound):
     version = 'v1.0.0'
     
 class KucoinFuturesBaseRestApi(object):
+    superReq=None
 
     def __init__(self, key='', secret='', passphrase='', url='', is_v1api=False):
         """
@@ -85,20 +86,19 @@ class KucoinFuturesBaseRestApi(object):
                 }
         headers["User-Agent"] = "kucoin-futures-python-sdk/" + version
         url = urljoin(self.url, uri)
-
-        superReq = requests
-        if self.TCP_NODELAY == 1:
-            superReq = requests.Session()
-            adapter = requests.adapters.HTTPAdapter()
-            adapter.socket_options = [
-                (socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-            ]
-            superReq.mount('https://', adapter)
+        if not self.superReq:
+            self.superReq = requests.Session()
+            if self.TCP_NODELAY == 1:
+                adapter = requests.adapters.HTTPAdapter()
+                adapter.socket_options = [
+                    (socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                ]
+                self.superReq.mount('https://', adapter)
 
         if method in ['GET', 'DELETE']:
-            response_data = superReq.request(method, url, headers=headers, timeout=timeout)
+            response_data = self.superReq.request(method, url, headers=headers, timeout=timeout)
         else:
-            response_data = superReq.request(method, url, headers=headers, data=data_json,
+            response_data = self.superReq.request(method, url, headers=headers, data=data_json,
                                              timeout=timeout)
         return self.check_response_data(response_data)
 
