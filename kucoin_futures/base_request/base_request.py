@@ -11,6 +11,7 @@ from uuid import uuid1
 from urllib.parse import urljoin
 import socket
 
+from requests import Session
 
 try:
     import pkg_resources
@@ -19,7 +20,6 @@ except (ModuleNotFoundError, pkg_resources.DistributionNotFound):
     version = 'v1.0.0'
     
 class KucoinFuturesBaseRestApi(object):
-    superReq=None
 
     def __init__(self, key='', secret='', passphrase='', url='', is_v1api=False):
         """
@@ -41,6 +41,14 @@ class KucoinFuturesBaseRestApi(object):
         self.passphrase = passphrase
         self.is_v1api = is_v1api
         self.TCP_NODELAY = 0
+        self._session = None
+
+    @property
+    def session(self) -> Session:
+        return self._session
+    @session.setter
+    def session(self, session: Session):
+        self._session = session
 
     def _request(self, method, uri, timeout=5, auth=True, params=None):
         uri_path = uri
@@ -86,19 +94,19 @@ class KucoinFuturesBaseRestApi(object):
                 }
         headers["User-Agent"] = "kucoin-futures-python-sdk/" + version
         url = urljoin(self.url, uri)
-        if not self.superReq:
-            self.superReq = requests.Session()
+        if not self.session:
+            self.session = requests.Session()
             if self.TCP_NODELAY == 1:
                 adapter = requests.adapters.HTTPAdapter()
                 adapter.socket_options = [
                     (socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
                 ]
-                self.superReq.mount('https://', adapter)
+                self.session.mount('https://', adapter)
 
         if method in ['GET', 'DELETE']:
-            response_data = self.superReq.request(method, url, headers=headers, timeout=timeout)
+            response_data = self.session.request(method, url, headers=headers, timeout=timeout)
         else:
-            response_data = self.superReq.request(method, url, headers=headers, data=data_json,
+            response_data = self.session.request(method, url, headers=headers, data=data_json,
                                              timeout=timeout)
         return self.check_response_data(response_data)
 
