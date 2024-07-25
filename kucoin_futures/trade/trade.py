@@ -680,7 +680,6 @@ class TradeData(KucoinFuturesBaseRestApi):
             'symbol': symbol,
             'from': fr,
             'to': to,
-
         }
         return self._request('GET', '/api/v1/contract/funding-rates', params=params)
 
@@ -732,3 +731,49 @@ class TradeData(KucoinFuturesBaseRestApi):
         """
         params = orderList
         return self._request('POST', '/api/v1/orders/multi', params=params)
+
+    def get_max_withdraw_margin(self,symbol):
+        """
+        Get Max Withdraw Margin
+        https://www.kucoin.com/docs/rest/futures-trading/positions/get-max-withdraw-margin
+        """
+        params = {
+            'symbol': symbol
+        }
+        return self._request('GET', '/api/v1/margin/maxWithdrawMargin',params=params)
+
+    def remove_margin_manually(self,symbol,withdrawAmount):
+        """
+        Remove Margin Manually
+        https://www.kucoin.com/docs/rest/futures-trading/positions/remove-margin-manually
+        """
+        params = {
+            'symbol': symbol,
+            'withdrawAmount':withdrawAmount
+        }
+        return self._request('POST', '/api/v1/margin/withdrawMargin',params=params)
+
+    def trading_pair_actual_fee_futures(self,symbol):
+        """
+        Trading pair actual fee - Futures
+        https://www.kucoin.com/docs/rest/funding/trade-fee/trading-pair-actual-fee-futures
+        """
+        params = {
+            'symbol': symbol
+        }
+        return self._request('GET', '/api/v1/trade-fees',params=params)
+
+    def get_positions_history(self,symbol=None,fr=None,to=None,limit=None,pageId=None):
+        """
+        Get Positions History
+        https://www.kucoin.com/docs/rest/futures-trading/positions/get-positions-history
+        """
+        params = {
+            'symbol': symbol,
+            'from': fr,
+            'to': to,
+            'limit': limit,
+            'pageId': pageId
+        }
+        params = {k: v for k, v in params.items() if v is not None}
+        return self._request('GET', '/api/v1/history-positions',params=params)

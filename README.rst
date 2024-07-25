@@ -19,6 +19,12 @@ Features
 
 update
 ----------
+- 2024 07/25
+1. 【NEW】GET /api/v1/margin/maxWithdrawMargin: Trade.get_max_withdraw_margin
+2. 【NEW】POST /api/v1/margin/withdrawMargin: Trade.remove_margin_manually
+3. 【NEW】GET /api/v1/trade-fees: Trade.trading_pair_actual_fee_futures
+4. 【NEW】GET /api/v1/history-positions: Trade.get_positions_history
+
 - 2024 02/07
  1. trade.get_public_funding_history: `Get Public Funding History <https://www.kucoin.com/docs/rest/futures-trading/funding-fees/get-public-funding-history>`_.
  2. trade.get_24h_futures_transaction_volume: `Get 24-hour platform futures trading volume <https://www.kucoin.com/docs/rest/futures-trading/market-data/get-24hour-futures-transaction-volume>`_.
