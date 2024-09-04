@@ -19,6 +19,14 @@ Features
 
 update
 ----------
+- 2024 09/04
+1. [NEW] GET /api/v1/allTickers
+2. [NEW] GET /api/v2/getMaxOpenSize
+3. [NEW] POST /api/v1/st-orders
+4. [Update] POST /api/v1/orders
+5. [Update] POST /api/v1/orders/test
+
+
 - 2024 07/25
 1. 【NEW】GET /api/v1/margin/maxWithdrawMargin: Trade.get_max_withdraw_margin
 2. 【NEW】POST /api/v1/margin/withdrawMargin: Trade.remove_margin_manually
