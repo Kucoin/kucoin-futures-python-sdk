@@ -130,7 +130,7 @@ class MarketData(KucoinFuturesBaseRestApi):
 
         :param symbol:
         :type: str
-        :return: {'symbol': 'XBTUSDM', 'indexPrice': 8194.22, 'granularity': 5000, 'timePoint': 1570613025000, 'value': 8194.49}
+        :return: {'symbol': 'XBTUSDTM', 'indexPrice': 8194.22, 'granularity': 5000, 'timePoint': 1570613025000, 'value': 8194.49}
         """
 
         return self._request('GET', '/api/v1/mark-price/{symbol}/current'.format(symbol=symbol), auth=False)
@@ -158,13 +158,13 @@ class MarketData(KucoinFuturesBaseRestApi):
          {
             "dataList": [
                       {
-                        "symbol": ".XBTUSDMPI",              //Premium index symbol
+                        "symbol": ".XBTUSDTMPI",              //Premium index symbol
                         "granularity": 60000,                //Granularity (milisecond)
                         "timePoint": 1558000320000,          //Time point (milisecond)
                         "value": 0.022585                    //Premium index
                       },
                       {
-                        "symbol": ".XBTUSDMPI",
+                        "symbol": ".XBTUSDTMPI",
                         "granularity": 60000,
                         "timePoint": 1558000260000,
                         "value": 0.022611
@@ -199,7 +199,7 @@ class MarketData(KucoinFuturesBaseRestApi):
         :param symbol:  type str (Mandatory)
         :return:
           {
-                "symbol": ".XBTUSDMFPI8H",              //Funding Rate Symbol
+                "symbol": ".XBTUSDTMFPI8H",              //Funding Rate Symbol
                 "granularity": 28800000,               //Granularity (milisecond)
                 "timePoint": 1558000800000,            //Time point (milisecond)
                 "value": 0.00375,                      //Funding rate
@@ -242,7 +242,7 @@ class MarketData(KucoinFuturesBaseRestApi):
         :param symbol: type tar (Mandatory)
         :return:
         {
-              "symbol": "XBTUSDM",      //Symbol
+              "symbol": "XBTUSDTM",      //Symbol
               "sequence": 100,          //Ticker sequence number
               "asks": [
                 ["5000.0", 1000],       //Price, quantity
@@ -270,7 +270,7 @@ class MarketData(KucoinFuturesBaseRestApi):
             {
             "code": "200000",
             "data": {
-              "symbol": "XBTUSDM",      //Symbol
+              "symbol": "XBTUSDTM",      //Symbol
               "sequence": 100,          //Ticker sequence number
               "asks": [
                 ["5000.0", 1000],   //Price, quantity
@@ -317,7 +317,7 @@ class MarketData(KucoinFuturesBaseRestApi):
           {
             "code": "200000",
             "data": {
-                "symbol": "XBTUSDM",        //Symbol
+                "symbol": "XBTUSDTM",        //Symbol
               "sequence":  100,     //The sequence number of the last received message in building a Level 3 order book
               "bids": [[5567483701231, "dfa123124", "123.12312", 10, 5567483701231], ...],  //Selling data: order placing time - nanosecond, order ID, price, quantity, time at which the order enters the order book -  nanosecond
               "asks": [[5567483701231, "dfa123124", "123.12312", 10, 5567483701231], ...]   //Buying data: order placing time - nanosecond, order ID, price, quantity, time at which the order enters the order book- nanosecond
@@ -338,7 +338,7 @@ class MarketData(KucoinFuturesBaseRestApi):
           {
             "code": "200000",
             "data": {
-                "symbol": "XBTUSDM",        //Symbol
+                "symbol": "XBTUSDTM",        //Symbol
               "sequence":  100,     //The sequence number of the last received message in building a Level 3 order book
               "bids": [[5567483701231, "dfa123124", "123.12312", 10, 5567483701231], ...],  //Selling data: order placing time - nanosecond, order ID, price, quantity, time at which the order enters the order book -  nanosecond
               "asks": [[5567483701231, "dfa123124", "123.12312", 10, 5567483701231], ...]   //Buying data: order placing time - nanosecond, order ID, price, quantity, time at which the order enters the order book- nanosecond
@@ -363,7 +363,7 @@ class MarketData(KucoinFuturesBaseRestApi):
         :return:
          [
         {
-          "symbol": "XBTUSDM",          //Symbol
+          "symbol": "XBTUSDTM",          //Symbol
           "sequence": 1,                //Message sequence number
           "side": "sell",               //Order side
           "orderTime": 1558074650840002300,       //Order placing time
@@ -375,7 +375,7 @@ class MarketData(KucoinFuturesBaseRestApi):
           "ts": 1558074652423004000               //Time at which the order enters the order book- nanosecond
         },
         {
-          "symbol": "XBTUSDM",          //Symbol
+          "symbol": "XBTUSDTM",          //Symbol
           "reason": "canceled",     //Reason: canceld or filled
           "sequence": 2,                //Message sequence number
           "orderId": "5cde551aa14a9cad7e454374", //Order ID
@@ -399,7 +399,7 @@ class MarketData(KucoinFuturesBaseRestApi):
         :return:
         {
           "sequence": 1001,             //Sequence number
-          "symbol": "XBTUSDM",              //Symbol
+          "symbol": "XBTUSDTM",              //Symbol
           "side": "buy",                    //Side of liquidity taker
           "size": 10,                       //Filled quantity
           "price": "7000.0",                //Filled price
@@ -425,7 +425,7 @@ class MarketData(KucoinFuturesBaseRestApi):
           "fairMethod": "FundingRate", //Fair price marking method
           "fundingBaseSymbol": ".XBTINT8H",  //Ticker symbol of the based currency
           "fundingQuoteSymbol": ".USDINT8H", //Ticker symbol of the quote currency
-          "fundingRateSymbol": ".XBTUSDMFPI8H",  //Funding rate symbol
+          "fundingRateSymbol": ".XBTUSDTMFPI8H",  //Funding rate symbol
           "indexSymbol": ".BXBT",    //Index symbol
           "initialMargin": 0.01, //Initial margin requirement
           "isDeleverage": true,   //Enabled ADL or not
@@ -445,7 +445,7 @@ class MarketData(KucoinFuturesBaseRestApi):
           "riskStep": 100,  //Risk limit increment value (unit: XBT)
           "rootSymbol": "XBT", //Contract group
           "status": "Open", //Contract status
-          "symbol": "XBTUSDM", //Ticker symbol of the contract
+          "symbol": "XBTUSDTM", //Ticker symbol of the contract
           "takerFeeRate": 0.0005,  //Taker fees
           "takerFixFee": 0.0000000600,   //Fixed taker fees
           "tickSize": 1,  //Minimum price changes
@@ -465,7 +465,7 @@ class MarketData(KucoinFuturesBaseRestApi):
           "fairMethod": "FundingRate", //Fair price marking method
           "fundingBaseSymbol": ".XBTINT8H",  //Ticker symbol of the based currency
           "fundingQuoteSymbol": ".USDINT8H", //Ticker symbol of the quote currency
-          "fundingRateSymbol": ".XBTUSDMFPI8H",  //Funding rate symbol
+          "fundingRateSymbol": ".XBTUSDTMFPI8H",  //Funding rate symbol
           "indexSymbol": ".BXBT",    //Index symbol
           "initialMargin": 0.01, //Initial margin requirement
           "isDeleverage": true,   //Enabled ADL or not
@@ -485,7 +485,7 @@ class MarketData(KucoinFuturesBaseRestApi):
           "riskStep": 100,  //Risk limit increment value (unit: XBT)
           "rootSymbol": "XBT", //Contract group
           "status": "Open", //Contract status
-          "symbol": "XBTUSDM", //Ticker symbol of the contract
+          "symbol": "XBTUSDTM", //Ticker symbol of the contract
           "takerFeeRate": 0.0005,  //Taker fees
           "takerFixFee": 0.0000000600,   //Fixed taker fees
           "tickSize": 1,  //Minimum price changes
@@ -539,3 +539,27 @@ class MarketData(KucoinFuturesBaseRestApi):
         """
         return self._request('GET', '/api/v1/status', auth=False)
 
+
+    def get_all_tickers(self):
+        """
+        https://www.kucoin.com/docs/rest/futures-trading/market-data/get-latest-ticker-for-all-contracts
+
+        Get Latest Ticker for All Contracts
+        Response:
+        +----------------+----------------------+
+        | Param          | Description          |
+        +----------------+----------------------+
+        | sequence       | Message sequence     |
+        | symbol         | Contract symbol      |
+        | side           | Trade direction      |
+        | size           | Contract size        |
+        | tradeId        | Trade ID             |
+        | price          | Transaction price    |
+        | bestBidPrice   | Best bid price       |
+        | bestBidSize    | Best bid size        |
+        | bestAskPrice   | Best ask price       |
+        | bestAskSize    | Best ask size        |
+        | ts             | Timestamp            |
+        +----------------+----------------------+
+        """
+        return self._request('GET', '/api/v1/allTickers', auth=False)

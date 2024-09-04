@@ -19,6 +19,14 @@ Features
 
 update
 ----------
+- 2024 09/04
+1. [NEW] GET /api/v1/allTickers
+2. [NEW] GET /api/v2/getMaxOpenSize
+3. [NEW] POST /api/v1/st-orders
+4. [Update] POST /api/v1/orders
+5. [Update] POST /api/v1/orders/test
+
+
 - 2024 07/25
 1. 【NEW】GET /api/v1/margin/maxWithdrawMargin: Trade.get_max_withdraw_margin
 2. 【NEW】POST /api/v1/margin/withdrawMargin: Trade.remove_margin_manually
@@ -59,13 +67,13 @@ Note:API key can only be generated after logging in.
 
 
     # get l3_order_book
-    l3_depth = client.l3_order_book('XBTUSDM')
+    l3_depth = client.l3_order_book('XBTUSDTM')
 
     # get l2_order_book
-    l2_depth = client.l2_order_book('XBTUSDM')
+    l2_depth = client.l2_order_book('XBTUSDTM')
 
     # get symbol ticker
-    klines = client.get_ticker("XBTUSDM")
+    klines = client.get_ticker("XBTUSDTM")
 
     # get symbol ticker
     server_time = client.get_server_timestamp()
@@ -81,16 +89,16 @@ Note:API key can only be generated after logging in.
 
 
     # place a limit buy order
-    order_id = client.create_limit_order('XBTUSDM', 'buy', '1', '30', '8600')
+    order_id = client.create_limit_order('XBTUSDTM', 'buy', '1', '30', '8600')
 
     # place a market buy order   Use cautiously
-    order_id = client.create_market_order('XBTUSDM', 'buy', '1')
+    order_id = client.create_market_order('XBTUSDTM', 'buy', '1')
 
     # cancel limit order
     client.cancel_order('5bd6e9286d99522a52e458de')
 
     # cancel all limit order
-    client.cancel_all_limit_order('XBTUSDM')
+    client.cancel_all_limit_order('XBTUSDTM')
 
     # User
     from kucoin_futures.client import User
