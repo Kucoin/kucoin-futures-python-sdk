@@ -777,3 +777,100 @@ class TradeData(KucoinFuturesBaseRestApi):
         }
         params = {k: v for k, v in params.items() if v is not None}
         return self._request('GET', '/api/v1/history-positions',params=params)
+
+    def get_max_open_size(self, symbol, price, leverage):
+        """
+        https://www.kucoin.com/docs/rest/futures-trading/positions/get-maximum-open-position-size
+        Get Maximum Open Position Size
+        Request:
+        +-----------+------------+-----------+-------------------+
+        | Parameter | Type       | Mandatory | Description       |
+        +-----------+------------+-----------+-------------------+
+        | symbol    | String     | Yes       | Contract symbol   |
+        | price     | BigDecimal | Yes       | Order price       |
+        | leverage  | BigDecimal | Yes       | Leverage          |
+        +-----------+------------+-----------+-------------------+
+        Response:
+        +------------------+-----------------------+
+        | Param            | Description           |
+        +------------------+-----------------------+
+        | symbol           | Contract symbol       |
+        | maxBuyOpenSize   | Maximum buy size      |
+        | maxSellOpenSize  | Maximum sell size     |
+        +------------------+-----------------------+
+        """
+
+        params = {
+            "symbol": symbol,
+            "price": price,
+            "leverage":leverage
+        }
+        return self._request('GET', '/api/v2/getMaxOpenSize', params=params)
+
+    def place_st_order(self, symbol, side, leverage, size, price, clientOid='', **kwargs):
+        """
+        Place take profit and stop loss order
+
+        https://www.kucoin.com/docs/rest/futures-trading/orders/place-take-profit-and-stop-loss-order
+
+        Public Order Placement Request Parameters
+        +------------------------+----------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Param                  | Type     | Mandatory | Description                                                                                                                                                                                   |
+        +------------------------+----------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | clientOid              | String   | Yes       | Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID. Only allows numbers, characters, underline(_), and separator(-)                     |
+        | side                   | String   | Yes       | buy or sell                                                                                                                                                                                   |
+        | symbol                 | String   | Yes       | A valid contract code. e.g. XBTUSDM                                                                                                                                                          |
+        | leverage               | String   | Yes       | Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.                                                                    |
+        | type                   | String   | No        | Either limit or market. The default type is limit                                                                                                                                             |
+        | remark                 | String   | No        | Remark for the order, length cannot exceed 100 UTF-8 characters                                                                                                                              |
+        | triggerStopUpPrice     | String   | No        | Take profit price                                                                                                                                                                             |
+        | stopPriceType          | String   | No        | Either TP, IP or MP                                                                                                                                                                           |
+        | triggerStopDownPrice   | String   | No        | Stop loss price                                                                                                                                                                               |
+        | reduceOnly             | boolean  | No        | A mark to reduce the position size only. Set to false by default. If set to TRUE, only the orders reducing the position size will be executed. Excess size will be canceled.                   |
+        | closeOrder             | boolean  | No        | A mark to close the position. Set to false by default. If TRUE, the system will close the position and the position size will become 0. Side, Size, and Leverage fields can be left empty.     |
+        | forceHold              | boolean  | No        | A mark to forcely hold the funds for an order. Set to false by default. The system will forcely freeze certain amount of funds for this order to ensure it won’t be canceled by the engine.     |
+        | stp                    | String   | No        | Self trade prevention, CN, CO, CB. Not supported DC at the moment                                                                                                                            |
+        +------------------------+----------+-----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        Additional Request Parameters Required by Limit Orders
+        +-------------+----------+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Param       | Type     | Mandatory | Description                                                                                                                                                    |
+        +-------------+----------+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | price       | String   | Yes       | Limit price                                                                                                                                                    |
+        | size        | Integer  | Yes       | Order size. Must be a positive number                                                                                                                          |
+        | timeInForce | String   | No        | GTC, IOC (default is GTC)                                                                                                                                      |
+        | postOnly    | boolean  | No        | Post only flag, invalid when timeInForce is IOC. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. |
+        | hidden      | boolean  | No        | Orders not displaying in the order book. When hidden is chosen, postOnly is not allowed.                                                                        |
+        | iceberg     | boolean  | No        | Only visible portion of the order is displayed in the order book. When iceberg is chosen, postOnly is not allowed.                                              |
+        | visibleSize | Integer  | No        | The maximum visible size of an iceberg order                                                                                                                   |
+        +-------------+----------+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        Additional Request Parameters Required by Market Orders
+
+        +------+---------+-----------+-----------------------------------+
+        | Param| Type    | Mandatory | Description                       |
+        +------+---------+-----------+-----------------------------------+
+        | size | Integer | No        | Amount of contracts to buy or sell|
+        +------+---------+-----------+-----------------------------------+
+
+        RESPONSES
+        +-----------+------------------+
+        | Param     | Description      |
+        +-----------+------------------+
+        | orderId   | Order ID.        |
+        | clientOid | Client order ID. |
+        +-----------+------------------+
+        """
+        params = {
+            'symbol': symbol,
+            'size': size,
+            'side': side,
+            'price': price,
+            'leverage': leverage,
+        }
+        if not clientOid:
+            clientOid = self.return_unique_id
+        params['clientOid'] = clientOid
+        if kwargs:
+            params.update(kwargs)
+        return self._request('POST', '/api/v1/st-orders', params=params)

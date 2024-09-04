@@ -539,3 +539,27 @@ class MarketData(KucoinFuturesBaseRestApi):
         """
         return self._request('GET', '/api/v1/status', auth=False)
 
+
+    def get_all_tickers(self):
+        """
+        https://www.kucoin.com/docs/rest/futures-trading/market-data/get-latest-ticker-for-all-contracts
+
+        Get Latest Ticker for All Contracts
+        Response:
+        +----------------+----------------------+
+        | Param          | Description          |
+        +----------------+----------------------+
+        | sequence       | Message sequence     |
+        | symbol         | Contract symbol      |
+        | side           | Trade direction      |
+        | size           | Contract size        |
+        | tradeId        | Trade ID             |
+        | price          | Transaction price    |
+        | bestBidPrice   | Best bid price       |
+        | bestBidSize    | Best bid size        |
+        | bestAskPrice   | Best ask price       |
+        | bestAskSize    | Best ask size        |
+        | ts             | Timestamp            |
+        +----------------+----------------------+
+        """
+        return self._request('GET', '/api/v1/allTickers', auth=False)
