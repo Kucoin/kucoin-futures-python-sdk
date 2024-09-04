@@ -27,7 +27,7 @@ class TradeData(KucoinFuturesBaseRestApi):
             "dataList": [
               {
                 "id": 36275152660006,                //id
-                "symbol": "XBTUSDM",                  //Symbol
+                "symbol": "XBTUSDTM",                  //Symbol
                 "timePoint": 1557918000000,          //Time point (milisecond)
                 "fundingRate": 0.000013,             //Funding rate
                 "markPrice": 8058.27,                //Mark price
@@ -68,7 +68,7 @@ class TradeData(KucoinFuturesBaseRestApi):
         :return:
         {
             "id": "5ce3cda60c19fc0d4e9ae7cd",                //Position ID
-            "symbol": "XBTUSDM",                              //Symbol
+            "symbol": "XBTUSDTM",                              //Symbol
             "autoDeposit": true,                             //Auto deposit margin or not
             "maintMarginReq": 0.005,                         //Maintenance margin requirement
             "riskLimit": 200,                                //Risk limit
@@ -116,7 +116,7 @@ class TradeData(KucoinFuturesBaseRestApi):
         :return:
         [{
           "id": "5ce3cda60c19fc0d4e9ae7cd",                //Position ID
-          "symbol": "XBTUSDM",                              //Symbol
+          "symbol": "XBTUSDTM",                              //Symbol
           "autoDeposit": true,                             //Auto deposit margin or not
           "maintMarginReq": 0.005,                         //Maintenance margin requirement
           "riskLimit": 200,                                //Risk limit
@@ -241,7 +241,7 @@ class TradeData(KucoinFuturesBaseRestApi):
       "totalPage":251915,
       "items":[
           {
-            "symbol": "XBTUSDM",  //Ticker symbol of the contract
+            "symbol": "XBTUSDTM",  //Ticker symbol of the contract
             "tradeId": "5ce24c1f0c19fc3c58edc47c",  //Trade ID
             "orderId": "5ce24c16b210233c36ee321d",  // Order ID
             "side": "sell",  //Transaction side
@@ -287,7 +287,7 @@ class TradeData(KucoinFuturesBaseRestApi):
 
         :return:
         [{
-         "symbol": "XBTUSDM",  //Ticker symbol of the contract
+         "symbol": "XBTUSDTM",  //Ticker symbol of the contract
          "tradeId": "5ce24c1f0c19fc3c58edc47c",  //Trade ID
          "orderId": "5ce24c16b210233c36ee321d",  //Order ID
          "side": "sell",  //Transaction side
@@ -461,7 +461,7 @@ class TradeData(KucoinFuturesBaseRestApi):
           "items": [
             {
               "id": "5cdfc138b21023a909e5ad55", //Order ID
-              "symbol": "XBTUSDM",  //Ticker symbol of the contract
+              "symbol": "XBTUSDTM",  //Ticker symbol of the contract
               "type": "limit",   //Order type, market order or limit order
               "side": "buy",  //Transaction side
               "price": "3600",  //Order price
@@ -516,7 +516,7 @@ class TradeData(KucoinFuturesBaseRestApi):
       "items": [
         {
             "id": "5cdfc138b21023a909e5ad55", //Order ID
-            "symbol": "XBTUSDM",  //Ticker symbol of the contract
+            "symbol": "XBTUSDTM",  //Ticker symbol of the contract
             "type": "limit",   //Order type, market order or limit order
             "side": "buy",  //Transaction side
             "price": "3600",  //Order price
@@ -569,7 +569,7 @@ class TradeData(KucoinFuturesBaseRestApi):
       "items": [
           {
             "id": "5cdfc138b21023a909e5ad55", //Order ID
-            "symbol": "XBTUSDM",  //Ticker symbol of the contract
+            "symbol": "XBTUSDTM",  //Ticker symbol of the contract
             "type": "limit",   //Order type, market order or limit order
             "side": "buy",  //Transaction side
             "price": "3600",  //Order price
@@ -618,7 +618,7 @@ class TradeData(KucoinFuturesBaseRestApi):
         :return:
         {
           "id": "5cdfc138b21023a909e5ad55", //Order ID
-          "symbol": "XBTUSDM",  //Ticker symbol of the contract
+          "symbol": "XBTUSDTM",  //Ticker symbol of the contract
           "type": "limit",   //Order type, market order or limit order
           "side": "buy",  //Transaction side
           "price": "3600",  //Order price

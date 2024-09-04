@@ -283,7 +283,7 @@ class UserData(KucoinFuturesBaseRestApi):
             "fee": null,//Fees
             "accountEquity": 8060.7899305281, //Account equity
             "status": "Pending", //Status. If you have held a position in the current 8-hour settlement period.
-            "remark": "XBTUSDM",//Ticker symbol of the contract
+            "remark": "XBTUSDTM",//Ticker symbol of the contract
             "offset": -1 //Offset,
             "currency": "XBT"  //Currency
           },
@@ -294,7 +294,7 @@ class UserData(KucoinFuturesBaseRestApi):
             "fee": 0,
             "accountEquity": 8060.7899305281,
             "status": "Completed",//Status. Status. Funding period that has been settled.
-         "remark": "XBTUSDM",
+         "remark": "XBTUSDTM",
          "offset": 1,
          "currency": "XBT"  //Currency
          }]
