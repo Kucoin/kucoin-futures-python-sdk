@@ -19,31 +19,7 @@ Features
 
 update
 ----------
-- 2024 09/04
-1. [NEW] GET /api/v1/allTickers
-2. [NEW] GET /api/v2/getMaxOpenSize
-3. [NEW] POST /api/v1/st-orders
-4. [Update] POST /api/v1/orders
-5. [Update] POST /api/v1/orders/test
-
-
-- 2024 07/25
-1. 【NEW】GET /api/v1/margin/maxWithdrawMargin: Trade.get_max_withdraw_margin
-2. 【NEW】POST /api/v1/margin/withdrawMargin: Trade.remove_margin_manually
-3. 【NEW】GET /api/v1/trade-fees: Trade.trading_pair_actual_fee_futures
-4. 【NEW】GET /api/v1/history-positions: Trade.get_positions_history
-
-- 2024 02/07
- 1. trade.get_public_funding_history: `Get Public Funding History <https://www.kucoin.com/docs/rest/futures-trading/funding-fees/get-public-funding-history>`_.
- 2. trade.get_24h_futures_transaction_volume: `Get 24-hour platform futures trading volume <https://www.kucoin.com/docs/rest/futures-trading/market-data/get-24hour-futures-transaction-volume>`_.
- 3. trade.cancel_order_by_clientOid: `Cancel Order by clientOid <https://www.kucoin.com/docs/rest/futures-trading/orders/cancel-order-by-clientoid>`_.
- 4. customized websocket: ./kucoin_futures/example_customized_ws_private.py | kucoin_futures/example_customized_ws_public.py.
-  - sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
- 5. set api TCP_NODELAY：After instantiating the client, you can cancel the Nagle algorithm through client.TCP_NODELAY=1 (default is 0)
-  - kucoin/example_client_TCP_NODELAY.py
-
-
-
+https://github.com/Kucoin/kucoin-futures-python-sdk/releases/
 
 Quick Start
 -----------

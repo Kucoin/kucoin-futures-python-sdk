@@ -807,6 +807,107 @@ class TradeData(KucoinFuturesBaseRestApi):
         }
         return self._request('GET', '/api/v2/getMaxOpenSize', params=params)
 
+    def get_margin_mode(self, symbol):
+        """
+        https://www.kucoin.com/docs/rest/futures-trading/positions/get-margin-mode
+        Query the margin mode of the current symbol.
+        Request
+        +------------+----------+-----------+--------------------------------------+
+        | Param      | Type     | Mandatory | Description                          |
+        +------------+----------+-----------+--------------------------------------+
+        | symbol     | String   | Yes       | Symbol of the contract               |
+        +------------+----------+-----------+--------------------------------------+
+
+        RESPONSES
+        +------------+-------------------------------------------------------------+
+        | Param      | Description                                                 |
+        +------------+-------------------------------------------------------------+
+        | symbol     | Symbol of the contract                                      |
+        | marginMode | Margin mode: ISOLATED (isolated), CROSS (cross margin).      |
+        +------------+-------------------------------------------------------------+
+        """
+
+        params = {
+            'symbol' : symbol
+        }
+        return self._request('GET', '/api/v2/position/getMarginMode', params=params)
+
+    def change_margin_mode(self, symbol, margin_mode):
+        """
+        https://www.kucoin.com/docs/rest/futures-trading/positions/modify-margin-mode
+        This interface can modify the margin mode of the current symbol
+        PARAMETERS
+        +------------+----------+-----------+------------------------------------------------------+
+        | Param      | Type     | Mandatory | Description                                          |
+        +------------+----------+-----------+------------------------------------------------------+
+        | symbol     | String   | Yes       | Symbol of the contract                               |
+        | marginMode | String   | Yes       | Modified margin model: ISOLATED (isolated), CROSS    |
+        |            |          |           | (cross margin).                                      |
+        +------------+----------+-----------+------------------------------------------------------+
+
+        RESPONSES
+        +------------+-------------------------------------------------------------+
+        | Param      | Description                                                 |
+        +------------+-------------------------------------------------------------+
+        | symbol     | Symbol of the contract                                      |
+        | marginMode | Margin mode: ISOLATED (isolated), CROSS (cross margin).      |
+        +------------+-------------------------------------------------------------+
+        """
+
+        params = {
+            'symbol' : symbol,
+            'marginMode' : margin_mode,
+        }
+        return self._request('POST', '/api/v2/position/changeMarginMode', params=params)
+
+
+    def get_cross_user_leverage(self, symbol):
+        """
+        https://www.kucoin.com/docs/rest/futures-trading/positions/get-cross-margin-leverage
+        PARAMETERS
+        +--------+--------+-----------+--------------------------+
+        | Param  | Type   | Mandatory | Description              |
+        +--------+--------+-----------+--------------------------+
+        | symbol | String | Yes       | Symbol of the contract   |
+        +--------+--------+-----------+--------------------------+
+
+        RESPONSES
+        +----------+--------------------------+
+        | Param    | Description              |
+        +----------+--------------------------+
+        | symbol   | Symbol of the contract   |
+        | leverage | Leverage multiple        |
+        +----------+--------------------------+
+        """
+        params = {
+            'symbol': symbol,
+        }
+        return self._request('GET', '/api/v2/getCrossUserLeverage', params=params)
+
+    def change_cross_user_leverage(self, symbol, leverage):
+        """
+        https://www.kucoin.com/docs/rest/futures-trading/positions/modify-cross-margin-leverage
+        PARAMETERS
+        +----------+--------+-----------+--------------------------+
+        | Param    | Type   | Mandatory | Description              |
+        +----------+--------+-----------+--------------------------+
+        | symbol   | String | Yes       | Symbol of the contract   |
+        | leverage | String | Yes       | Leverage multiple        |
+        +----------+--------+-----------+--------------------------+
+
+        RESPONSES
+        +-------+----------------------+
+        | Param | Description          |
+        +-------+----------------------+
+        | data  | Whether successful   |
+        +-------+----------------------+
+        """
+        params = {
+            'symbol': symbol,
+            'leverage' : leverage,
+        }
+        return self._request('POST', '/api/v2/changeCrossUserLeverage', params=params)
+
     def place_st_order(self, symbol, side, leverage, size, price, clientOid='', **kwargs):
         """
         Place take profit and stop loss order
